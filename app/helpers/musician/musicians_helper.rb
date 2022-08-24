@@ -1,0 +1,2 @@
+module Musician::MusiciansHelper
+end

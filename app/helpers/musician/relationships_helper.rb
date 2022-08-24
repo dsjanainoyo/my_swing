@@ -1,0 +1,2 @@
+module Musician::RelationshipsHelper
+end
