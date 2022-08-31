@@ -19,7 +19,7 @@
   <%=f.text_field :price,autofocus: true,placeholder: 'xxx'%>円
   
   <%=f.label :place, '場所'%>
-  <%-f.text_field :place,autofocus: true,autocomplete: "place",placeholder: '場所を記述'%>
+  <%=f.text_field :place,autofocus: true,autocomplete: "place",placeholder: '場所を記述'%>
   
   <%=f.label :genre_item_ids,'ジャンル'%>
   <%= f.collection_check_boxes(:genre_item_ids, GenreItem.all, :id, :name) do |genre| %>

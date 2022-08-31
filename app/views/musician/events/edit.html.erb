@@ -18,14 +18,21 @@
   <%=f.label :place,'場所'%>
   <%=f.text_field :place,autofocus: true%>
   
-  <%=f.label :genre,'ジャンル'%>
-  <%=f.select :genre,options_form_collection_for_select(Genre.all,:id,:name)%>
+  <%=f.label :genre_item_ids, "ジャンル"%>
+  <%= f.collection_check_boxes(:genre_item_ids, GenreItem.all, :id, :name) do |genre| %>
+      <div class='form-check'>
+          <%= genre.label class: 'form-check-label' do %>
+              <%= genre.check_box class: 'form-check-input' %>
+              <%= genre.text %>
+          <% end %>
+      </div>
+  <% end %>
   
   <%=f.label :capacity,'最大予約人数'%>
   <%=f.text_field :capacity,autofocus: true%>
   
   <%=f.label :seating_status,'予約ステータス'%>
-  <%=f.select :seating_status,Event.seating_status.keys,include_blank: true%>
+  <%=f.select :seating_status,Event.seating_statuses.keys,include_blank: true%>
   
   <%=f.submit "編集する",class: "btn btn-success"%>
 <%end%>

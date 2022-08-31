@@ -14,9 +14,9 @@
     <tbody>
         <%@events.each do |event|%>
           <tr>
-              <td><%=event.name%></td>
+              <td><%=link_to event.name,musician_event_path(event.id)%></td>
               <td><%=event.datetime%></td>
-              <td><%=event.reservation.count%>/<%=event.capacity%></td>
+              <td><%=event.reservations.count%>/<%=event.capacity%></td>
               <td><%=event.seating_status%></td>
           </tr>
         <%end%>

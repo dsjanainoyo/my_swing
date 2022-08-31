@@ -13,6 +13,7 @@ class Musician::EventsController < ApplicationController
 
   def create
     event=Event.new(event_params)
+    event.musician_id=current_musician.id
     event.save
     redirect_to musician_events_path
   end
@@ -22,6 +23,9 @@ class Musician::EventsController < ApplicationController
   end
 
   def update
+    event=Event.find(params[:id])
+    event.update(event_params)
+    redirect_to musician_event_path(event.id)
   end
   
   private

@@ -1,2 +1,26 @@
-<h1>Public::Musicians#index</h1>
-<p>Find me in app/views/public/musicians/index.html.erb</p>
+<%=render 'layouts/public_header'%>
+
+<h2>ミュージシャン一覧</h2>
+
+<table class="table">
+    <thead class="bg-light">
+        <tr>
+            <th>名前</th>
+            <th>投稿イベント</th>
+            <th>ジャンル</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <% @musicians.each do |musician|%>
+              <td><%=link_to musician.name, public_musician_path(musician.id)%></td>
+              <td><%=musician.events.count%></td>
+              <td>
+                  <%musician.genre_items.each do |genre_item|%>
+                    <%=genre_item.name%>
+                  <%end%>
+              </td>
+            <%end%>
+        </tr>
+    </tbody>
+</table>
