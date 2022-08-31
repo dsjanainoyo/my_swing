@@ -1,2 +1,21 @@
-<h1>Admin::Events#index</h1>
-<p>Find me in app/views/admin/events/index.html.erb</p>
+<%=render 'layouts/admin_header'%>
+
+<h2>イベント一覧</h2>
+
+<table class="table">
+    <thead class="bg-light">
+        <th>イベント名</th>
+        <th>日時</th>
+        <th>予約数</th>
+        <th>予約ステータス</th>
+    </thead>
+    
+    <tbody>
+        <% @events.each do |event|%>
+          <td><%=event.name%></td>
+          <td><%=event.datetime%></td>
+          <td><%=event.reservations.count%></td>
+          <td><%=event.reservations.reserve_status%></td>
+        <%end%>
+    </tbody>
+</table>

@@ -1,2 +1,26 @@
-<h1>Musician::Musicians#edit</h1>
-<p>Find me in app/views/musician/musicians/edit.html.erb</p>
+<%= render 'layouts/musician_header'%>
+
+<h2>ミュージシャン情報編集</h2>
+<%=link_to "退会する",musician_musicians_withdrawal_path,method: :patch,class:"btn btn-danger"%>
+
+<%=form_with model: @musician, url: musician_musician_path(@musician),method: :patch do |f|%>
+  <%=f.label :musician_image, "プロフィール画像"%>
+  <%=f.file_field :musician_image, accept: 'image/*',placeholder: 'ファイルを選択'%>
+  
+  <%=f.label :name, "名前"%>
+  <%=f.text_field :name ,autofocus: true, autocomplete: "name",placeholder: 'ミュージシャン名' %>
+  
+  <%=f.label :introduction,"説明文"%>
+  <%=f.text_area :introduction, autofocus: true, placeholder: '説明文'%>
+  
+  <%=f.label :genre_item_ids, "ジャンル"%>
+  <%= f.collection_check_boxes(:genre_item_ids, GenreItem.all, :id, :name) do |genre| %>
+      <div class='form-check'>
+          <%= genre.label class: 'form-check-label' do %>
+              <%= genre.check_box class: 'form-check-input' %>
+              <%= genre.text %>
+          <% end %>
+      </div>
+  <% end %>
+  <%=f.submit '編集する',class:"succcess"%>
+<%end%>

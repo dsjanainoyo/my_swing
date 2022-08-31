@@ -1,2 +1,10 @@
-<h1>Admin::Genres#edit</h1>
-<p>Find me in app/views/admin/genres/edit.html.erb</p>
+<%= render 'layouts/admin_header'%>
+
+<h2>ジャンル編集</h2>
+
+<%= form_with model: @genre_item, url: admin_genre_item_path(@genre_item),method: :patch do |f|%>
+  <%=f.text_field :name%>
+  <%=f.submit '編集する',class:"btn btn-success"%>
+<%end%>
+
+<%=link_to "削除",admin_genre_item_path(@genre_item),method: :delete,class:"btn btn-danger"%>

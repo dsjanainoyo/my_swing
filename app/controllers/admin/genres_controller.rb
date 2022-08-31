@@ -1,16 +1,16 @@
 class Admin::GenresController < ApplicationController
   def index
-  end
-
-  def create
+    @genre_item=GenreItem.new
+    @genre_items=GenreItem.all
   end
 
   def edit
+    @genre_item=GenreItem.find(params[:id])
   end
 
-  def update
-  end
-
-  def destroy
+  
+  private
+  def genre_params
+    params.permit(:name)
   end
 end

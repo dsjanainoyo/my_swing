@@ -1,0 +1,55 @@
+<header>
+ <nav class="navbar navbar-light">
+   <div class="container-fluid">
+     
+     <div class="row">
+       <div class="d-flex justify-content-center">
+         <div class="nav-brand">
+           <%=link_to "My Swing",root_path, class:"navbar-brand border-dark"%>
+         </div>
+       </div>
+     </div>
+         
+        <% if musician_signed_in?%>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                    <%=link_to "ログアウト",destroy_musician_session_path,method: :delete,class:"btn btn-light border mr-3"%>
+              </li>
+              
+              <li class="nav-item">
+                      <%=link_to "マイページ",musician_musician_path(current_musician),class:"btn btn-light border mr-3"%>
+              </li>
+              
+              <li class="nav-item">
+                      <%=link_to "イベント作成",new_musician_event_path,class:"btn btn-light border mr-3"%>
+              </li>
+              
+              <li class="nav-item">
+                      <%=link_to "フォロワー一覧", musician_relationships_index_path,class:"btn btn-light border mr-3"%> 
+              </li>
+              
+            </ul>
+            <%else%>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <%=link_to "新規登録",new_user_registration_path,class:"btn btn-light border mr-3" %>
+              </li>
+              
+              <li class="nav-item">
+                <%=link_to "ログイン",new_user_session_path,class:"btn btn-light border mr-3" %>
+              </li>
+              
+              <li class="nav-item">
+                <%=link_to "イベント一覧",root_path,class:"btn btn-light border mr-3" %>
+              </li>
+              
+              <li class="nav-item">
+                <%=link_to "ミュージシャン一覧",musicians_index_path,class:"btn btn-light border mr-3" %>
+              </li>
+              
+            </ul>
+        <%end%>
+   </div>
+ </nav>
+</header>
+

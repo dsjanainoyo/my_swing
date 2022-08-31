@@ -1,2 +1,35 @@
-<h1>Musician::Musicians#show</h1>
-<p>Find me in app/views/musician/musicians/show.html.erb</p>
+<%=render 'layouts/musician_header'%>
+<h2>マイページ</h2>
+
+<%if current_musician.musician_image.attached?%>
+  <%= image_tag current_musician.musician_image,size:"200x200"%>
+<%else%>
+  <%=image_tag 'no_image',size:"200x200"%>
+<%end%>
+
+<%=link_to "編集",edit_musician_musician_path(current_musician),class:"btn btn-success"%>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>名前</td>
+            <td><%=current_musician.name%></td>
+        </tr>
+        <tr>
+            <td>説明文</td>
+            <td><%=current_musician.introduction%></td>
+        </tr>
+        <tr>
+            <td>ジャンル</td>
+            <td>
+                <% current_musician.genre_items.each do |genre_item|%>
+                  <%=genre_item.name%>
+                <%end%>
+            </td>
+        </tr>
+        <tr>
+            <td>フォロワー数</td>
+            <td><%=link_to @follower.count,musician_relationships_index_path%></td>
+        </tr>
+    </tbody>
+</table>

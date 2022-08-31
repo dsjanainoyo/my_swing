@@ -1,2 +1,22 @@
-<h1>Admin::Musicians#index</h1>
-<p>Find me in app/views/admin/musicians/index.html.erb</p>
+<%= render 'layouts/admin_header'%>
+
+<h2>ミュージシャン一覧</h2>
+
+<table class="table">
+    <thead class="bg-light">
+        <tr>
+            <th>名前</th>
+            <th>投稿イベント</th>
+            <th>ジャンル</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @musicians.each do |musician|%>
+          <tr>
+              <td><%=link_to musician.name,admin_musician_path(musician.id)%></td>
+              <td><%=musician.events.count%></td>
+              <td><%=musician.genres.name%></td>
+          </tr>
+        <%end%>
+    </tbody>
+</table>

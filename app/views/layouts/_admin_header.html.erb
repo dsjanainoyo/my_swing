@@ -1,0 +1,59 @@
+<header>
+ <nav class="navbar navbar-light">
+   <div class="container-fluid">
+     
+     <div class="row">
+       <div class="d-flex justify-content-center">
+         <div class="nav-brand">
+           <%=link_to "My Swing",root_path, class:"navbar-brand border-dark"%>
+         </div>
+       </div>
+     </div>
+         
+        <% if admin_signed_in?%>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                    <%=link_to "ログアウト",destroy_admin_session_path,method: :delete,class:"btn btn-light border mr-3"%>
+              </li>
+              
+              <li class="nav-item">
+                      <%=link_to "ミュージシャン一覧", admin_musicians_path,class:"btn btn-light border mr-3"%>
+              </li>
+              
+              <li class="nav-item">
+                      <%=link_to "ユーザー一覧",admin_users_path,class:"btn btn-light border mr-3"%>
+              </li>
+              
+              <li class="nav-item">
+                      <%=link_to "イベント一覧",admin_events_path,class:"btn btn-light border mr-3"%> 
+              </li>
+              
+              <li class="nav-item">
+                      <%=link_to "ジャンル",admin_genres_path,class:"btn btn-light border mr-3"%> 
+              </li>
+              
+            </ul>
+            <%else%>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <%=link_to "新規登録",new_user_registration_path,class:"btn btn-light border mr-3" %>
+              </li>
+              
+              <li class="nav-item">
+                <%=link_to "ログイン",new_user_session_path,class:"btn btn-light border mr-3" %>
+              </li>
+              
+              <li class="nav-item">
+                <%=link_to "イベント一覧",root_path,class:"btn btn-light border mr-3" %>
+              </li>
+              
+              <li class="nav-item">
+                <%=link_to "ミュージシャン一覧",musicians_index_path,class:"btn btn-light border mr-3" %>
+              </li>
+              
+            </ul>
+        <%end%>
+   </div>
+ </nav>
+</header>
+

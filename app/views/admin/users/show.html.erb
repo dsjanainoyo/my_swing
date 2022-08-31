@@ -1,2 +1,35 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<%= render 'layouts/admin_header'%>
+
+<h2>ユーザー詳細</h2>
+
+<%if @user.user_image.attached?%>
+  <%= image_tag @user.musician_image,size:"200x200"%>
+<%else%>
+  <%=image_tag 'no_image',size:"200x200"%>
+<%end%>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>名前</td>
+            <td><%= @user.name%></td>
+        </tr>
+        
+        <tr>
+            <td>フォロー中のミュージシャン</td>
+            <td><%=@user.relationships.count%></td>
+        </tr>
+        
+        <tr>
+            <td>いいねしたイベント</td>
+            <td><%=@user.favorites.count%></td>
+        </tr>
+        
+        <tr>
+            <td>好みのジャンル</td>
+            <td><%=@user.genres.name%></td>
+        </tr>
+    </tbody>
+</table>
+
+<%=link_to "退会する",admin_musicians_withdrawal_path,method: :patch,class:"btn btn-danger"%>

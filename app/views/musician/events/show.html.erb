@@ -1,2 +1,43 @@
-<h1>Musician::Events#show</h1>
-<p>Find me in app/views/musician/events/show.html.erb</p>
+<%=render 'layouts/musician_header'%>
+
+<h2><%=@event.name%></h2>
+
+<%if @event.event_image.attached?%>
+  <%= image_tag @evenr.event_image,size:"200x200"%>
+<%else%>
+  <%=image_tag 'no_image',size:"200x200"%>
+<%end%>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>ミュージシャン名</td>
+            <td><%=@event.musician.name%></td>
+        </tr>
+        
+        <tr>
+            <td>説明文</td>
+            <td><%=@event.introduction%></td>
+        </tr>
+        
+        <tr>
+            <td>日時</td>
+            <td><%=@event.datetime%></td>
+        </tr>
+        
+        <tr>
+            <td>場所</td>
+            <td><%=@event.place%></td>
+        </tr>
+        
+        <tr>
+            <td>予約ステータス</td>
+            <td><%=@event.seating_status%></td>
+        </tr>
+        
+        <tr>
+            <td>予約数</td>
+            <td><%=@event.capacity%></td>
+        </tr>
+    </tbody>
+</table>
