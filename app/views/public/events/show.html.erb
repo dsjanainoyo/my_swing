@@ -1,2 +1,47 @@
-<h1>Public::Events#show</h1>
-<p>Find me in app/views/public/events/show.html.erb</p>
+<%= render 'layouts/public_header'%>
+
+<h2><%=@event.name%></h2>
+
+<% if @event.event_image.attached?%>
+  <%=image_tag @event.event_image, size: '200x200'%>
+<%else%>
+  <%=image_tag 'no_image', size: '200x200'%>
+<%end%>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>ミュージシャン名</td>
+            <td><%=@event.musician.name%></td>
+        </tr>
+        
+        <tr>
+            <td>説明文</td>
+            <td><%=@event.introduction%></td>
+        </tr>
+        
+        <tr>
+            <td>日時</td>
+            <td><%=@event.datetime%></td>
+        </tr>
+        
+        <tr>
+            <td>場所</td>
+            <td><%=@event.place%></td>
+        </tr>
+        
+        <tr>
+            <td>ジャンル</td>
+            <% @event.genre_items.each do |genre_item|%>
+                <td><%=genre_item.name%></td>
+            <%end%>
+        </tr>
+        
+        <tr>
+            <td>予約ステータス</td>
+            <td><%=@event.seating_status%></td>
+        </tr>
+    </tbody>
+</table>
+<%=link_to "いいね",class:"btn btn-light"%>
+<%=link_to "予約する", new_public_event_reservation_path(@event.id),class:"btn btn-primary"%>

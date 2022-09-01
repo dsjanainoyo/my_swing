@@ -1,2 +1,23 @@
-<h1>Public::Reservations#index</h1>
-<p>Find me in app/views/public/reservations/index.html.erb</p>
+<%= render 'layouts/public_header'%>
+
+<h2>予約一覧</h2>
+
+<table>
+    <thead class="bg-light">
+        <tr>
+            <th>イベント名</th>
+            <th>予約人数</th>
+            <th>日時</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <% @reservations.each do |reservation|%>
+          <tr>
+              <td><%=link_to reservation.event.name,public_event_path(reservation.event.id)%></td>
+              <td><%=reservation.headcount%></td>
+              <td><%=reservation.event.datetime%></td>
+          </tr>
+        <%end%>
+    </tbody>
+</table>

@@ -1,2 +1,42 @@
-<h1>Public::Musicians#show</h1>
-<p>Find me in app/views/public/musicians/show.html.erb</p>
+<%=render 'layouts/public_header'%>
+
+<h2><%=@musician.name%>のプロフィール</h2>
+
+<% if @musician.musician_image.attached?%>
+  <%=image_tag @musician.musician_image,size: '200x200'%>
+<%else%>
+  <%=image_tag 'no_image',size: '200x200'%>
+<%end%>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>名前</td>
+            <td><%=@musician.name%></td>
+        </tr>
+        
+        <tr>
+            <td>説明文</td>
+            <td><%=@musician.introduction%></td>
+        </tr>
+        
+        <tr>
+            <td>ジャンル</td>
+            <td>
+                <% @musician.genre_items.each do |genre_item|%>
+                  <td><%=genre_item.name%></td>
+                <%end%>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>フォロワー</td>
+            <td><%=@musician.relationships.count%></td>
+        </tr>
+    </tbody>
+</table>
+
+
+<% @musician.events.each do |event|%>
+  <%=event.name%>
+<%end%>

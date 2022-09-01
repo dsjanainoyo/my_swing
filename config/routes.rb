@@ -26,9 +26,12 @@ Rails.application.routes.draw do
   namespace :public do
     resources :users, only: [:show,:edit,:update]
     patch 'users/withdrawal'=>'users#withdrawal'
-    resources :events, only: [:index,:show]
+    resources :events, only: [:index,:show] do 
+      resources :reservations, only: [:new,:create]
+    end
+    get 'reservations/index'
     resources :musicians, only: [:index,:show]
-    resources :reservations, only: [:new,:create,:index]
+    
     get 'relationships/index'
     get 'favorites/index'
   end

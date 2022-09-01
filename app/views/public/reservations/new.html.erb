@@ -1,2 +1,34 @@
-<h1>Public::Reservations#new</h1>
-<p>Find me in app/views/public/reservations/new.html.erb</p>
+<%= render 'layouts/public_header'%>
+
+<h2>予約</h2>
+
+<% if @event.event_image.attached?%>
+  <%=image_tag @event.event_image,size: '200x200'%>
+<%else%>
+  <%=image_tag 'no_image',size: '200x200'%>
+<%end%>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>イベント名</td>
+            <td><%=@event.name%></td>
+        </tr>
+        
+        <tr>
+            <td>予約ステータス</td>
+            <td><%=@event.seating_status%></td>
+        </tr>
+        
+        <tr>
+            <%= form_with model: @reservation, url: public_event_reservations_path(@event.id) do |f|%>
+              <td><%=f.label :headcount, '人数'%></td>
+            <td><%= f.select :headcount, *[1..10],{include_blank: '選択してください'}%></td>
+        </tr>
+              <%=f.hidden_field :event_id, :value => @event.id%>
+              <%=f.submit '予約する',class:"btn btn-success"%>
+              
+            <%end%>
+    </tbody>
+</table>
+
