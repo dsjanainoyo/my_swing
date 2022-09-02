@@ -43,5 +43,46 @@
         </tr>
     </tbody>
 </table>
-<%=link_to "いいね",class:"btn btn-light"%>
+
+<% if @event.favorite_by?(current_user)%>
+  <%=link_to "いいねをやめる", public_event_favorites_path(@event),method: :delete,class:"btn btn-danger"%>
+<%else%>
+  <%=link_to "いいね", public_event_favorites_path(@event),method: :post,class:"btn btn-light"%>
+<%end%>
+
 <%=link_to "予約する", new_public_event_reservation_path(@event.id),class:"btn btn-primary"%>
+
+<h3>コメント</h3>
+
+<%=form_with model: [@event,@comment],url: public_event_comments_path(@event) do |f|%>
+  <%=f.text_area :comment,placeholder: 'コメントを記述'%>
+  <%=f.submit 'コメント',class:"btn btn-success"%>
+<%end%>
+
+<% @event.comments.each do |comment|%>
+  <% if comment.musician_id=current_musician.id%>
+  
+    <% if comment.musician_image.attached?%>
+      <%=image_tag comment.musician_image,size: '100x100'%>
+    <%else%>
+      <%=image_tag 'no_image',size: '100x100'%>
+    <%end%>
+    <%=comment.musician.name%>
+    <%=comment.comment%>
+    <%=comment.created_at.strftime('%Y/%m/%d')%>
+    
+  <%else%>
+    
+    <% if comment.user_image.attached?%>
+      <%=image_tag comment.user_image,size: '100x100'%>
+    <&else>
+      <%=image_tag 'no_image',size: '100x100'%>
+    <%end%>
+    <%=comment.user.name%>
+    <%=comment.comment%>
+    <%=comment.created_at.strftime('%Y/%m/%d')%>
+    
+  <%end%>
+<%end%>
+  
+  

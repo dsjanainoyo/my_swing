@@ -3,8 +3,8 @@ class Event < ApplicationRecord
     
     has_many :reservations
     belongs_to :musician
-    has_many :favorites
-    has_many :comments
+    has_many :favorites, dependent: :destroy
+    has_many :comments, dependent: :destroy
     has_many :event_genres
     has_many :genre_items, through: :event_genres, dependent: :destroy
     
@@ -13,4 +13,8 @@ class Event < ApplicationRecord
         slightly: 1,
         sold_out: 2
     }
+    
+    def favorite_by?(user)
+        favorites.exists?(user_id: user.id)
+    end
 end

@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_150251) do
   end
 
   create_table "comments", force: :cascade do |t|
+    t.text "comment"
     t.integer "musician_id", null: false
     t.integer "user_id", null: false
     t.integer "event_id", null: false

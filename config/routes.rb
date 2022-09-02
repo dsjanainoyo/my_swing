@@ -28,6 +28,8 @@ Rails.application.routes.draw do
     patch 'users/withdrawal'=>'users#withdrawal'
     resources :events, only: [:index,:show] do 
       resources :reservations, only: [:new,:create]
+      resources :comments, only: [:create]
+      resource :favorites, only: [:create,:destroy]
     end
     get 'reservations/index'
     resources :musicians, only: [:index,:show]
