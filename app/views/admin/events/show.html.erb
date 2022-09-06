@@ -1,2 +1,54 @@
-<h1>Admin::Events#show</h1>
-<p>Find me in app/views/admin/events/show.html.erb</p>
+<%= render 'layouts/admin_header'%>
+
+<h2>イベント詳細</h2>
+
+<% if @event.event_image.attached?%>
+  <%=image_tag @event.event_image,size: '200x200'%>
+<%else%>
+  <%=image_tag 'no_image',size: '200x200'%>
+<%end%>
+
+<%=link_to "削除する",admin_event_path(@event), method: :delete, class:"btn btn-danger"%>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <td>ミュージシャン名</td>
+            <td><%=@event.musician.name%></td>
+        </tr>
+        
+        <tr>
+            <td>説明文</td>
+            <td><%=@event.introduction%></td>
+        </tr>
+        
+        <tr>
+            <td>日時</td>
+            <td><%=@event.datetime%></td>
+        </tr>
+        
+        <tr>
+            <td>場所</td>
+            <td><%=@event.place%></td>
+        </tr>
+        
+        <tr>
+            <td>ジャンル</td>
+            <td>
+                <% @event.genre_items.each do |genre_item|%>
+                  <%= genre_item.name%>
+                <%end%>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>予約ステータス</td>
+            <td><%=@event.seating_status_i18n%></td>
+        </tr>
+        
+        <tr>
+            <td>予約数</td>
+            <td><%=@total_headcount%>/<%=@event.capacity%></td>
+        </tr>
+    </tbody>
+</table>

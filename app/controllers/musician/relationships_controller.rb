@@ -1,6 +1,6 @@
 class Musician::RelationshipsController < ApplicationController
-  def index
-    @followers=current_musician.relationships
+  def followers
+    @followers=current_musician.followers.page(params[:page]).per(8)
 
   end
 end

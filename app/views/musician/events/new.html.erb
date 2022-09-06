@@ -1,6 +1,14 @@
 <%= render 'layouts/musician_header'%>
 
 <h2>イベント作成</h2>
+<% if @event.errors.any? %>
+  <%= @event.errors.count%>件のエラーが発生しました
+  <ul>
+    <% @event.errors.full_messages.each do |message|%>
+      <li><%= message%></li>
+    <%end%>
+  </ul>
+<%end%>
 
 <%=form_with model: @event,url: musician_events_path do |f|%>
   <%=f.label :event_image,'イベント画像'%>

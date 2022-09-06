@@ -10,10 +10,15 @@ class Public::ReservationsController < ApplicationController
     reservation.save
     redirect_to  public_reservations_index_path
   end
+  
+  def destroy
+    reservation=Reservation.find(params[:id])
+    reservation.destroy
+    redirect_to request.referer
+  end
 
   def index
-    @reservations=Reservation.all
-    #@reservations.user_id=current_user.id
+    @reservations=current_user.reservations.page(params[:page]).per(8)
   end
   
   private

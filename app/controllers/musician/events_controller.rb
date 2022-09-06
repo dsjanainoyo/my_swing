@@ -1,6 +1,6 @@
 class Musician::EventsController < ApplicationController
   def index
-    @events=current_musician.events
+    @events=current_musician.events.page(params[:page]).per(8)
   end
 
   def show
@@ -12,10 +12,13 @@ class Musician::EventsController < ApplicationController
   end
 
   def create
-    event=Event.new(event_params)
-    event.musician_id=current_musician.id
-    event.save
-    redirect_to musician_events_path
+    @event=Event.new(event_params)
+    @event.musician_id=current_musician.id
+    if @event.save
+      redirect_to musician_events_path
+    else
+      render :new
+    end
   end
 
   def edit

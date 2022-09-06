@@ -2,6 +2,7 @@
 
 class Musician::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  before_action :musician_state, only: [:create]
   
   def after_sign_in_path_for(resource)
     musician_events_path(resource)
@@ -22,7 +23,19 @@ class Musician::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+   protected
+   
+   def musician_state
+     @musician=Musician.find_by(email: params[:musician][:email])
+   return if !@musician
+   
+   if @musician.valid_password?(params[:musician][:password])
+     if @musician.is_deleted == "withdrawal"
+        redirect_to  new_musician_session_path
+     end
+   end
+   
+   end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

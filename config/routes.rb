@@ -8,33 +8,38 @@ Rails.application.routes.draw do
  namespace :admin do
     resources :genres, only: [:index,:edit]
     resources :events, only: [:index,:show,:destroy]
-    resources :users, only: [:index,:show,:withdrawal]
-    resources :musicians, only: [:index,:show,:withdrawal]
+    resources :users, only: [:index,:show] 
+    patch 'users/:id/withdrawal' => 'users#withdrawal', as: 'users_withdrawal'
+    resources :musicians, only: [:index,:show] 
+    patch 'musicians/:id/withdrawal'=>'musicians#withdrawal'  ,as: 'musicians_withdrawal'
     resources :genre_items, only: [:create,:edit,:update,:destroy]
-    patch 'musicians/withdrawal'=>'musicians#withdrawal'
+    
     
   end
   
   namespace :musician do
     resources :musicians, only: [:show,:edit,:update]
     patch 'musicians/withdrawal'=>'musicians#withdrawal'
-    resources :events, only: [:index,:show,:new,:create,:edit,:update]
-    get 'relationships/index'
-    get 'comments/create'
+    resources :events, only: [:index,:show,:new,:create,:edit,:update] do
+      resources :comments, only: [:create]
+    end
+    get 'followers' => 'relationships#followers', as: 'followers'
   end
   
   namespace :public do
     resources :users, only: [:show,:edit,:update]
-    patch 'users/withdrawal'=>'users#withdrawal'
+    patch 'users/:id/withdrawal'=>'users#withdrawal'
     resources :events, only: [:index,:show] do 
-      resources :reservations, only: [:new,:create]
+      resources :reservations, only: [:new,:create,:destroy]
       resources :comments, only: [:create]
       resource :favorites, only: [:create,:destroy]
     end
     get 'reservations/index'
-    resources :musicians, only: [:index,:show]
+    resources :musicians, only: [:index,:show] do
+      resources :relationships, only: [:create,:destroy]
+    end
     
-    get 'relationships/index'
+    get 'relationships' => 'relationships#followings', as: 'followings'
     get 'favorites/index'
   end
 

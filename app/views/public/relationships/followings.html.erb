@@ -12,14 +12,16 @@
     </thead>
     
     <tbody>
-        <tr>
-            <% @musician.each do |musician|%>
-              <td><%=musician.name%></td>
+        <% @musicians.each do |musician|%>
+          <tr>
+              <td><%=link_to musician.name,public_musician_path(musician)%></td>
               <td><%=musician.events.count%></td>
               <% musician.genre_items.each do |genre_item|%>
                 <td><%=genre_item.name%></td>
               <%end%>
-            <%end%>
-        </tr>
+          </tr>
+        <%end%>
     </tbody>
 </table>
+
+<%= paginate @musicians%>

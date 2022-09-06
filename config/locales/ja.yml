@@ -1,0 +1,17 @@
+ja:
+  enums:
+    user:
+      is_deleted:
+        validity: "有効"
+        withdrawal: "無効"
+        
+    musician:
+      is_deleted:
+        validity: "有効"
+        withdrawal: "無効"
+        
+    event:
+      seating_status:
+        reservable: "残り席あり"
+        slightly: "残り席わずか"
+        sold_out: "売り切れ"

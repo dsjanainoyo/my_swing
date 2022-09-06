@@ -2,6 +2,11 @@
 
 <h2>ミュージシャン一覧</h2>
 
+<%=form_tag(musicians_index_path, method: 'get') do %>
+  <%=text_field_tag(:musician_key)%>
+  <%=submit_tag ('検索')%>
+<%end%>
+
 <table class="table">
     <thead class="bg-light">
         <tr>
@@ -11,16 +16,17 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <% @musicians.each do |musician|%>
-              <td><%=link_to musician.name, public_musician_path(musician.id)%></td>
+        <% @musicians.each do |musician|%>
+          <tr>
+             <td><%=link_to musician.name, public_musician_path(musician.id)%></td>
               <td><%=musician.events.count%></td>
               <td>
                   <%musician.genre_items.each do |genre_item|%>
                     <%=genre_item.name%>
                   <%end%>
               </td>
-            <%end%>
-        </tr>
+          </tr>
+        <%end%> 
     </tbody>
 </table>
+<%= paginate @musicians%>

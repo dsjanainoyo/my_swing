@@ -2,6 +2,7 @@
 
 class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  before_action :user_state, only: [:create]
 
   # GET /resource/sign_in
   # def new
@@ -18,7 +19,19 @@ class Public::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+   protected
+   
+   def user_state
+     @user=User.find_by(email: params[:user][:email])
+   return if !@musician
+   
+   if @user.valid_password?(params[:user][:password])
+     if @user.is_deleted == "withdrawal"
+        redirect_to  new_user_session_path
+     end
+   end
+   
+   end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

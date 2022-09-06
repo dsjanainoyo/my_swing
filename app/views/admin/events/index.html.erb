@@ -12,10 +12,19 @@
     
     <tbody>
         <% @events.each do |event|%>
-          <td><%=event.name%></td>
-          <td><%=event.datetime%></td>
-          <td><%=event.reservations.count%></td>
-          <td><%=event.reservations.reserve_status%></td>
+          <tr>
+              <td><%=link_to event.name, admin_event_path(event)%></td>
+              <td><%=event.datetime%></td>
+              <td>
+                  <%event.reservations.each do |reservation|%>
+                    <% @total_headcount=@total_headcount+reservation.headcount%>
+                  <%end%>
+                  <%=@total_headcount%>
+                  /<%=event.capacity%>
+              </td>
+              <td><%=event.seating_status_i18n%></td>
+          </tr>
         <%end%>
     </tbody>
 </table>
+<%= paginate @events%>

@@ -2,12 +2,15 @@ class Public::CommentsController < ApplicationController
   def create
     event=Event.find(params[:event_id])
     comment=Comment.new(comment_params)
-    
-    if comment.user_id=current_user.id
+    comment.event_id = event.id
+    comment.user_id=current_user&.id
+    comment.musician_id=current_musician&.id
+
+    if comment.user_id
       comment.save
       redirect_to public_event_path(event)
     else
-      comment.musician_id=current_musician.id
+      
       comment.save
       redirect_to musician_event_path(event)
     end 

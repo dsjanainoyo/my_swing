@@ -1,3 +1,36 @@
 <%= render 'layouts/public_header'%>
 
-<h2></h2>
+<h2>いいねしたイベント</h2>
+
+<div class="card-deck">
+    <% @events.each do |event|%>
+      <div class="card bg-light">
+        <%= link_to public_event_path(event.id) do %>
+            <div class="card-body">
+                <% if event.event_image.attached?%>
+                  <%=image_tag event.event_image,size: '100x100'%>
+                <%else%>
+                  <%=image_tag 'no_image'%>
+                <%end%>
+                <h4 class="card-title"><%=event.name%></h4>
+                
+                <p><%=event.musician.name%></p>
+                <p><%=event.datetime%></p>
+                
+                <p>
+                   <% event.genre_items.each do |genre_item|%>
+                     <div class="border">
+                       <%=genre_item.name%>
+                     </div>
+                   <%end%>
+                </p>
+                
+                
+                <%=event.created_at%>
+            </div>
+        <%end%>
+      </div>
+    <%end%>
+</div>
+
+<%= paginate @events%>

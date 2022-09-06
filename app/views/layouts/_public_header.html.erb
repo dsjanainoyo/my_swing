@@ -17,6 +17,10 @@
               </li>
               
               <li class="nav-item">
+                <%=link_to "ミュージシャン一覧",musicians_index_path,class:"btn btn-light border mr-3" %>
+              </li>
+              
+              <li class="nav-item">
                       <%=link_to "マイページ",public_user_path(current_user),class:"btn btn-light border mr-3"%>
               </li>
               
@@ -29,7 +33,7 @@
               </li>
               
               <li class="nav-item">
-                      <%=link_to "フォロー",public_relationships_index_path,class:"btn btn-light border mr-3"%>
+                      <%=link_to "フォロー", public_followings_path,class:"btn btn-light border mr-3"%>
               </li>
             </ul>
             <%else%>
@@ -48,6 +52,10 @@
               
               <li class="nav-item">
                 <%=link_to "ミュージシャン一覧",musicians_index_path,class:"btn btn-light border mr-3" %>
+              </li>
+              
+              <li class="nav-item">
+                <%=link_to "ミュージシャンの方はこちら",new_musician_session_path,class:"btn btn-light border mr-3" %>
               </li>
               
             </ul>

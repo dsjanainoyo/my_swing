@@ -1,5 +1,6 @@
 class Public::FavoritesController < ApplicationController
   def index
+    @events=current_user.events.page(params[:page]).per(6)
   end
   
   def create

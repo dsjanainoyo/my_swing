@@ -17,7 +17,9 @@
               <td><%=link_to reservation.event.name,public_event_path(reservation.event.id)%></td>
               <td><%=reservation.headcount%></td>
               <td><%=reservation.event.datetime%></td>
+              <td><%=link_to "削除する",public_event_reservation_path(reservation.event_id,reservation.id), method: :delete,class:"btn btn-danger"%></td>
           </tr>
         <%end%>
     </tbody>
 </table>
+<%= paginate @reservations%>

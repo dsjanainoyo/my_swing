@@ -3,7 +3,7 @@
 <h2>ユーザー詳細</h2>
 
 <%if @user.user_image.attached?%>
-  <%= image_tag @user.musician_image,size:"200x200"%>
+  <%= image_tag @user.user_image,size:"200x200"%>
 <%else%>
   <%=image_tag 'no_image',size:"200x200"%>
 <%end%>
@@ -27,9 +27,22 @@
         
         <tr>
             <td>好みのジャンル</td>
-            <td><%=@user.genres.name%></td>
+            <td>
+                <%@user.genre_items.each do |genre_item|%>
+                  <%=genre_item.name%>
+                <%end%>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>退会ステータス</td>
+            <td><%=@user.is_deleted_i18n%></td>
         </tr>
     </tbody>
 </table>
 
-<%=link_to "退会する",admin_musicians_withdrawal_path,method: :patch,class:"btn btn-danger"%>
+<%if @user.is_deleted== "validity"%>
+  <%=link_to "退会する",admin_users_withdrawal_path(@user.id),method: :patch,class:"btn btn-danger"%>
+<%else%>
+  <p class="btn btn-secondary">無効</p>
+<%end%>

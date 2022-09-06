@@ -9,10 +9,12 @@
         </tr>
     </thead>
     <tbody>
-        <% @followers.each do |follower|%>
-          <tr>
-              <td><%=follower.user.name%></td>
-          </tr>
-        <%end%>
+        <tr>
+            <% @followers.each do |follower|%>
+              <td><%=follower.name%></td>
+            <%end%>
+        </tr>
+        
     </tbody>
 </table>
+<%= paginate @followers%>

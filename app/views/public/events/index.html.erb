@@ -2,6 +2,10 @@
 
 <h2>イベント一覧</h2>
 
+<%=form_tag('/', method: 'get') do %>
+  <%=text_field_tag(:event_key)%>
+  <%=submit_tag ('検索')%>
+<%end%>
 
 <div class="card-deck">
     <% @events.each do |event|%>
@@ -20,7 +24,9 @@
                 
                 <p>
                    <% event.genre_items.each do |genre_item|%>
-                     <%=genre_item.name%>
+                     <div class="border">
+                       <%=genre_item.name%>
+                     </div>
                    <%end%>
                 </p>
                 
@@ -31,3 +37,5 @@
       </div>
     <%end%>
 </div>
+
+<%= paginate @events%>

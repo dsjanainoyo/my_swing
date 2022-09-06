@@ -22,14 +22,27 @@
         
         <tr>
             <td>ジャンル</td>
-            <td><%=@musician.genres.name%></td>
+            <td>
+                <% @musician.genre_items.each do |genre_item|%>
+                  <%=genre_item.name%>
+                <%end%>
+            </td>
         </tr>
         
         <tr>
             <td>フォロワー数</td>
             <td><%=@musician.relationships.count%></td>
         </tr>
+        
+        <tr>
+            <td>退会ステータス</td>
+            <td><%=@musician.is_deleted_i18n%></td>
+        </tr>
     </tbody>
 </table>
 
-<%=link_to "退会する",admin_musicians_withdrawal_path,method: :patch,class:"btn btn-danger"%>
+<%if @musician.is_deleted=="validity"%>
+  <%=link_to "退会する",admin_musicians_withdrawal_path(@musician),method: :patch,class:"btn btn-danger"%>
+<%else%>
+  <p class="btn btn-secondary">無効</p>
+<%end%>

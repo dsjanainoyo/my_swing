@@ -8,6 +8,13 @@ class Event < ApplicationRecord
     has_many :event_genres
     has_many :genre_items, through: :event_genres, dependent: :destroy
     
+    validates :name, presence: true
+    validates :introduction, presence: true
+    validates :datetime, presence: true
+    validates :place, presence: true
+    validates :price, presence: true
+    validates :capacity, presence: true
+    
     enum seating_status:{
         reservable: 0,
         slightly: 1,
