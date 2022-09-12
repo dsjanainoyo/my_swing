@@ -1,25 +1,38 @@
 <%= render 'layouts/public_header'%>
 
-<h2>予約一覧</h2>
-
-<table>
-    <thead class="bg-light">
-        <tr>
-            <th>イベント名</th>
-            <th>予約人数</th>
-            <th>日時</th>
-        </tr>
-    </thead>
+<main>
+    <div class="row">
+        <div class="col-4"></div>
+          <h2 class="col-4 bg-light text-center">予約一覧</h2>
+        <div class="col-4"></div>
+    </div>
     
-    <tbody>
-        <% @reservations.each do |reservation|%>
-          <tr>
-              <td><%=link_to reservation.event.name,public_event_path(reservation.event.id)%></td>
-              <td><%=reservation.headcount%></td>
-              <td><%=reservation.event.datetime%></td>
-              <td><%=link_to "削除する",public_event_reservation_path(reservation.event_id,reservation.id), method: :delete,class:"btn btn-danger"%></td>
-          </tr>
-        <%end%>
-    </tbody>
-</table>
-<%= paginate @reservations%>
+    <div class="mx-auto w-50">
+        <table class="table text-center">
+            <thead class="bg-light">
+                <tr>
+                    <th class="text-center">イベント名</th>
+                    <th class="text-center">予約人数</th>
+                    <th class="text-center">日時</th>
+                    <th></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <% @reservations.each do |reservation|%>
+                  <tr>
+                      <td class="text-center"><%=link_to reservation.event.name,public_event_path(reservation.event.id)%></td>
+                      <td class="text-center"><%=reservation.headcount%></td>
+                      <td class="text-center"><%=reservation.event.datetime%></td>
+                      <td class="text-center"><%=link_to "削除する",public_event_reservation_path(reservation.event_id,reservation.id), method: :delete,class:"btn btn-danger"%></td>
+                  </tr>
+                <%end%>
+            </tbody>
+        </table>
+        
+        <div class="text-center">
+            <%= paginate @reservations%>
+        </div>
+        
+    </div>
+</main>

@@ -1,95 +1,146 @@
 <%= render 'layouts/public_header'%>
 
-<h2><%=@event.name%></h2>
-
-<% if @event.event_image.attached?%>
-  <%=image_tag @event.event_image, size: '200x200'%>
-<%else%>
-  <%=image_tag 'no_image', size: '200x200'%>
-<%end%>
-
-<table class="table">
-    <tbody>
-        <tr>
-            <td>ミュージシャン名</td>
-            <td><%=@event.musician.name%></td>
-        </tr>
-        
-        <tr>
-            <td>説明文</td>
-            <td><%=@event.introduction%></td>
-        </tr>
-        
-        <tr>
-            <td>日時</td>
-            <td><%=@event.datetime%></td>
-        </tr>
-        
-        <tr>
-            <td>場所</td>
-            <td><%=@event.place%></td>
-        </tr>
-        
-        <tr>
-            <td>ジャンル</td>
-            <% @event.genre_items.each do |genre_item|%>
-                <td><%=genre_item.name%></td>
-            <%end%>
-        </tr>
-        
-        <tr>
-            <td>予約ステータス</td>
-            <td><%=@event.seating_status%></td>
-        </tr>
-    </tbody>
-</table>
-<% if current_user.present?%>
-    <% if @event.favorite_by?(current_user)%>
-      <%=link_to "いいねをやめる", public_event_favorites_path(@event),method: :delete,class:"btn btn-danger"%>
-    <%else%>
-      <%=link_to "いいね", public_event_favorites_path(@event),method: :post,class:"btn btn-light"%>
-    <%end%>
-
-
-<%=link_to "予約する", new_public_event_reservation_path(@event.id),class:"btn btn-primary"%>
-<%end%>
-
-
-<h3>コメント</h3>
-<% if current_user.present?%>
-    <%=form_with model: [@event,@comment],url: public_event_comments_path(@event) do |f|%>
-      <%=f.text_area :comment,placeholder: 'コメントを記述'%>
-      <%=f.submit 'コメント',class:"btn btn-success"%>
-    <%end%>
-    
-    <% @event.comments.each do |comment|%>
-      <% if comment.user_id==current_user.id%>
-    
-        <% if comment.user.user_image.attached?%>
-          <%=image_tag comment.user.user_image,size: '100x100'%>
-        <%else%>
-          <%=image_tag 'no_image',size: '100x100'%>
-        <%end%>
-        <%=comment.user.name%>
-        <%=comment.comment%>
-        <%=comment.created_at.strftime('%Y/%m/%d')%>
-        
+<main>
+  
+  <div class="row">
+    <div class="col-4"></div>
+      <h2 class="col-4 bg-light text-center"><%=@event.name%></h2>
+    <div class="col-4"></div>
+  </div>
+  
+  
+  <div class="text-center">
+    <% if current_user.present?%>
+      <% if @event.favorite_by?(current_user)%>
+        <%=link_to "いいねをやめる", public_event_favorites_path(@event),method: :delete,class:"btn btn-danger m-3"%>
       <%else%>
-      
-        <% if comment.musician.musician_image.attached?%>
-          <%=image_tag comment.musician.musician_image,size: '100x100'%>
-        <%else%>
-          <%=image_tag 'no_image',size: '100x100'%>
-        <%end%>
-        <%=comment.musician.name%>
-        <%=comment.comment%>
-        <%=comment.created_at.strftime('%Y/%m/%d')%>  
-    
-        
+        <%=link_to "いいね", public_event_favorites_path(@event),method: :post,class:"btn btn-info m-3"%>
       <%end%>
+
+      <%=link_to "予約する", new_public_event_reservation_path(@event.id),class:"btn btn-primary m-3"%>
     <%end%>
-<%else%>
-  <p>コメントするにはログインしてください</p>
-<%end%>
+  </div>
+  
+  
+  <div class="text-center">
+    <% if @event.event_image.attached?%>
+      <%=image_tag @event.event_image, size: '250x250'%>
+    <%else%>
+      <%=image_tag 'no_image', size: '250x250'%>
+    <%end%>
+  </div>
+  
+  
+  <div class="mx-auto w-50">
+    <table class="table text-center">
+        <tbody>
+            <tr>
+                <td class="text-center">ミュージシャン名</td>
+                <td class="text-center"><%=@event.musician.name%></td>
+            </tr>
+            
+            <tr>
+                <td class="text-center">説明文</td>
+                <td class="text-center"><%=@event.introduction%></td>
+            </tr>
+            
+            <tr>
+                <td class="text-center">日時</td>
+                <td class="text-center"><%=@event.datetime%></td>
+            </tr>
+            
+            <tr>
+                <td class="text-center">場所</td>
+                <td class="text-center"><%=@event.place%></td>
+            </tr>
+            
+            <tr>
+                <td class="text-center">ジャンル</td>
+                <% @event.genre_items.each do |genre_item|%>
+                    <td class="text-center"><%=genre_item.name%></td>
+                <%end%>
+            </tr>
+            
+            <tr>
+                <td class="text-center">予約ステータス</td>
+                <td class="text-center"><%=@event.seating_status%></td>
+            </tr>
+        </tbody>
+    </table>
+  </div>
+  
+  
+  <div class="col-4">
+    <h3 class="text-center border border-dark border-top-0 border-right-0 border-left-0">コメント</h3>
+  </div>
+  
+  
+  <% if current_user.present?%>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+           <%=form_with model: [@event,@comment],url: public_event_comments_path(@event) do |f|%>
+            <%=f.text_area :comment,placeholder: 'コメントを記述'%>
+            <%=f.submit 'コメント',class:"btn btn-success"%>
+          <%end%>
+        </div>
+        
+        <div class="col-6">
+           <% @event.comments.each do |comment|%>
+             <div class="border">
+               <% if comment.user==current_user%>
+               
+                <div class="d-flex align-items-center">
+                  <% if comment.user.user_image.attached?%>
+                    <%=image_tag comment.user.user_image,size: '100x100',class:"img-thumbnail"%>
+                  <%else%>
+                    <%=image_tag 'no_image',size: '100x100', class:"img-thumbnail"%>
+                  <%end%>
+                
+           
+                  <div class="text-center">
+                    <h5><%=comment.user.name%></h5></br>
+                    <p><%=comment.comment%></p></br>
+                    <p class="text-secondary"><%=comment.created_at.strftime('%Y年%m月%d日')%></p>
+                  </div>
+                </div>
+                
+              <%elsif comment.musician.present?%>
+                <div class="d-flex align-items-center">
+                  <% if comment.musician.musician_image.attached?%>
+                    <%=image_tag comment.musician.musician_image,size: '100x100', class:"img-thumbnail"%>
+                  <%else%>
+                    <%=image_tag 'no_image',size: '100x100', class:"img-thumbnail"%>
+                  <%end%>
+                  
+                  <div class="text-center">
+                    <h5><%=comment.musician.name%></h5>
+                    <p><%=comment.comment%></p>
+                    <p class="text-secondary"><%=comment.created_at.strftime('%Y年%m月%d日')%>  </p>
+                  </div>
+
+                </div>
+                  
+          
+              <%else%>
+              
+                <p>コメントがありません</p>
+              <%end%>
+              
+             </div>
+              
+          <%end%>
+        </div>
+      </div>
+    </div>
+        
+  <%else%>
+    <p>コメントするにはログインしてください</p>
+  <%end%>
+</main>
+
+
+
+  
   
   

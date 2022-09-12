@@ -1,41 +1,65 @@
 <%= render 'layouts/public_header'%>
 
-<h2>イベント一覧</h2>
-
-<%=form_tag('/', method: 'get') do %>
-  <%=text_field_tag(:event_key)%>
-  <%=submit_tag ('検索')%>
-<%end%>
-
-<div class="card-deck">
-    <% @events.each do |event|%>
-      <div class="card bg-light">
-        <%= link_to public_event_path(event.id) do %>
-            <div class="card-body">
-                <% if event.event_image.attached?%>
-                  <%=image_tag event.event_image,size: '100x100'%>
-                <%else%>
-                  <%=image_tag 'no_image'%>
-                <%end%>
-                <h4 class="card-title"><%=event.name%></h4>
+<main>
+  
+  
+  <div class="row">
+    <div class="col-4"></div>
+    <h2 class="col-4 bg-light text-center">イベント一覧</h2>
+    <div class="col-4">
+      <%=form_tag('/', method: 'get') do %>
+        <%=text_field_tag(:event_key)%>
+        <%=submit_tag ('検索')%>
+      <%end%>
+    </div>
+  </div>
+  
+  
+  <div class="row">
+    <div class="card-deck justify-content-center">
+        <% @events.each do |event|%>
+        
+          <div class="card bg-light col-md-4">
+            <%= link_to public_event_path(event.id) do %>
+            
+                <h4 class="card-header"><%=event.name%></h4>
                 
-                <p><%=event.musician.name%></p>
-                <p><%=event.datetime%></p>
-                
-                <p>
-                   <% event.genre_items.each do |genre_item|%>
-                     <div class="border">
-                       <%=genre_item.name%>
-                     </div>
-                   <%end%>
-                </p>
-                
-                
-                <%=event.created_at%>
+                <div class="card-body">
+                  <div class="text-center">
+                    <% if event.musician.musician_image.attached?%>
+                      <%=image_tag event.musician.musician_image,width:'100%',height:'100%'%>
+                    <%else%>
+                      <%=image_tag 'no_image',width:'100%',height:'100%'%>
+                    <%end%>
+                    
+                    <p><%=event.musician.name%></p>
+                    <p><%=event.datetime%></p>
+                    
+                    <p>
+                       <% event.genre_items.first(3).each do |genre_item|%>
+                         <div class="m-1 p-1 border">
+                           <%=genre_item.name%>
+                         </div>
+                       <%end%>  
+                    </p>
+                  </div>
+                    
+              </div>
+            <%end%>
+            <div class="card-footer">
+              <%=event.created_at.strftime('%Y年%m月%d日%H時%M分')%>
             </div>
+          </div>
+          
         <%end%>
-      </div>
-    <%end%>
-</div>
+    </div>
+  </div>
+  
+  <div class="text-center">
+    <%= paginate @events%>
+  </div>
+  
 
-<%= paginate @events%>
+</main>
+
+    

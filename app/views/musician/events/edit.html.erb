@@ -1,40 +1,72 @@
 <%= render 'layouts/musician_header'%>
 
-<h2><%=@event.name%>編集</h2>
-
-<%= form_with model: @event, url: musician_event_path(@event), method: :patch do |f|%>
-  <%=f.label :event_image, 'イベント画像'%>
-  <%=f.file_field :event_image,accept: 'image/*',placeholder: "ファイルを選択"%>
+<main>
+  <div class="row">
+    <div class="col-4"></div>
+      <h2 class="col-4 bg-light text-center"><%=@event.name%>の編集</h2>
+    <div class="col-4"></div>
+  </div>
   
-  <%=f.label :name,'イベント名'%>
-  <%=f.text_field :name,autofocus: true%>
-  
-  <%=f.label :introduction, "説明文"%>
-  <%=f.text_area :introduction,autofocus: true%>
-  
-  <%=f.label :datetime, "日時"%>
-  <%=f.text_field :datetime, autofocus: true%>
-  
-  <%=f.label :place,'場所'%>
-  <%=f.text_field :place,autofocus: true%>
-  
-  <%=f.label :genre_item_ids, "ジャンル"%>
-  <%= f.collection_check_boxes(:genre_item_ids, GenreItem.all, :id, :name) do |genre| %>
-      <div class='form-check'>
-          <%= genre.label class: 'form-check-label' do %>
-              <%= genre.check_box class: 'form-check-input' %>
-              <%= genre.text %>
-          <% end %>
+  <div class="text-center">
+    <%= form_with model: @event, url: musician_event_path(@event), method: :patch do |f|%>
+      <div class="form-group p-2">
+        <%=f.label :event_image,'イベント画像:'%>
+        <%=f.file_field :event_image,accept: 'image/*',placeholder: "ファイルを選択"%></br>
       </div>
-  <% end %>
-  
-  <%=f.label :capacity,'最大予約人数'%>
-  <%=f.text_field :capacity,autofocus: true%>
-  
-  <%=f.label :seating_status,'予約ステータス'%>
-  <%=f.select :seating_status,Event.seating_statuses.keys,include_blank: true%>
-  
-  <%=f.submit "編集する",class: "btn btn-success"%>
-<%end%>
-  
-  
+      
+      <div class="form-group p-2">
+        <%=f.label :name, 'イベント名:'%>
+        <%=f.text_field :name,autofocus: true,placeholder: 'イベント名を記述'%></br>
+      </div>
+      
+      <div class="form-group p-2">
+        <%=f.label :introduction,'説明文:'%>
+        <%=f.text_area :introduction,autofocus: true,placeholder: '説明文を記述'%></br>
+      </div>
+      
+      <div class="form-group p-2">
+        <%=f.label :datetime,'日時:'%>
+        <%=f.select :start_month,*[1..12],autofocus: true%>月
+        <%=f.select :start_day,*[1..31],autofocus: true%>日
+        <%=f.select :start_hour,*[0..23],autofocus: true%>時
+        <%=f.select :start_minutes,[[00],[15],[30],[45]],autofocus: true%>分</br>
+      </div>
+      
+      <div class="form-group p-2">
+        <%=f.label :price,'チャージ料金:'%>
+        <%=f.text_field :price,autofocus: true,placeholder: 'xxx'%>円</br>
+      </div>
+      
+      <div class="form-group p-2">
+        <%=f.label :place, '場所:'%>
+        <%=f.text_field :place,autofocus: true,autocomplete: "place",placeholder: '場所を記述'%></br>
+      </div>
+      
+      <div class="form-group p-2">
+        <%=f.label :genre_item_ids,'ジャンル'%>
+        <%= f.collection_check_boxes(:genre_item_ids, GenreItem.all, :id, :name) do |genre| %>
+            <div class='form-check'>
+                <%= genre.label class: 'form-check-label' do %>
+                    <%= genre.check_box class: 'form-check-input' %>
+                    <%= genre.text %>
+                <% end %>
+            </div>
+        <% end %></br>
+      </div>
+      
+      <div class="form-group p-2">
+        <%=f.label :capacity, '最大予約人数:'%>
+        <%=f.text_field :capacity, autofocus: true, placeholder: 'xx'%></br>
+      </div>
+      
+      <div class="form-group p-2">
+        <%=f.label :seating_status,'予約ステータス'%>
+        <%=f.select :seating_status,Event.seating_statuses.keys,include_blank: true%>
+      </div>
+      
+      <div class="text-center">
+        <%=f.submit "編集する",class: "btn btn-success"%>
+      </div>
+    <%end%>
+  </div>
+</main>

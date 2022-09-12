@@ -1,25 +1,37 @@
 <%= render 'layouts/musician_header'%>
 
-<h2>イベント一覧</h2>
-
-<table class="table">
-    <thead class="bg-light">
-        <tr>
-            <th>イベント名</th>
-            <th>日時</th>
-            <th>予約数</th>
-            <th>予約ステータス</th>
-        </tr>
-    </thead>
-    <tbody>
-        <%@events.each do |event|%>
-          <tr>
-              <td><%=link_to event.name,musician_event_path(event.id)%></td>
-              <td><%=event.datetime%></td>
-              <td><%=event.reservations.count%>/<%=event.capacity%></td>
-              <td><%=event.seating_status%></td>
-          </tr>
-        <%end%>
-    </tbody>
-</table>
-<%= paginate @events%>
+<main>
+  <div class="row">
+    <div class="col-4"></div>
+      <h2 class="col-4 bg-light text-center">投稿したイベント</h2>
+    <div class="col-4"></div>
+  </div>
+  
+  <div class="mx-auto w-50">
+    <table class="table text-center">
+        <thead class="bg-light">
+            <tr>
+                <th class="text-center">イベント名</th>
+                <th class="text-center">日時</th>
+                <th class="text-center">予約数</th>
+                <th class="text-center">予約ステータス</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%@events.each do |event|%>
+              <tr>
+                  <td class="text-center"><%=link_to event.name,musician_event_path(event.id)%></td>
+                  <td class="text-center"><%=event.datetime%></td>
+                  <td class="text-center"><%=event.reservations.count%>/<%=event.capacity%></td>
+                  <td class="text-center"><%=event.seating_status_i18n%></td>
+              </tr>
+            <%end%>
+        </tbody>
+    </table>
+    
+    <div class="text-center">
+        <%= paginate @events%>  
+    </div>
+    
+  </div>
+</main>

@@ -1,30 +1,39 @@
 <%=render 'layouts/admin_header'%>
 
-<h2>イベント一覧</h2>
+<main>
+  <div class="row">
+    <div class="col-4"></div>
+      <h2 class="col-4 bg-light text-center">イベント一覧</h2>
+    <div class="col-4"></div>
+  </div>
+  
+    <div class="">
+        <table class="table justify-content-center m-auto">
+            <thead class="bg-light">
+                <th class="text-center">イベント名</th>
+                <th class="text-center">日時</th>
+                <th class="text-center">予約数</th>
+                <th class="text-center">予約ステータス</th>
+            </thead>
+            
+            <tbody>
+                <% @events.each do |event|%>
+                  <tr>
+                      <td class="text-center"><%=link_to event.name, admin_event_path(event)%></td>
+                      <td class="text-center"><%=event.datetime%></td>
+                      <td class="text-center">
+                          <%event.reservations.each do |reservation|%>
+                            <% @total_headcount=@total_headcount+reservation.headcount%>
+                          <%end%>
+                          <%=@total_headcount%>
+                          /<%=event.capacity%>
+                      </td>
+                      <td class="text-center"><%=event.seating_status_i18n%></td>
+                  </tr>
+                <%end%>
+            </tbody>
+        </table>
+        <%= paginate @events%>
+    </div>
+</main>
 
-<table class="table">
-    <thead class="bg-light">
-        <th>イベント名</th>
-        <th>日時</th>
-        <th>予約数</th>
-        <th>予約ステータス</th>
-    </thead>
-    
-    <tbody>
-        <% @events.each do |event|%>
-          <tr>
-              <td><%=link_to event.name, admin_event_path(event)%></td>
-              <td><%=event.datetime%></td>
-              <td>
-                  <%event.reservations.each do |reservation|%>
-                    <% @total_headcount=@total_headcount+reservation.headcount%>
-                  <%end%>
-                  <%=@total_headcount%>
-                  /<%=event.capacity%>
-              </td>
-              <td><%=event.seating_status_i18n%></td>
-          </tr>
-        <%end%>
-    </tbody>
-</table>
-<%= paginate @events%>

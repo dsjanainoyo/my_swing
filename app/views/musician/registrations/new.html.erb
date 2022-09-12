@@ -1,47 +1,59 @@
 <%= render 'layouts/musician_header'%>
 
-<h2>ミュージシャン新規登録</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "musician/shared/error_messages", resource: resource %>
-  
-  <div class="field">
-    <%= f.label :musician_image,'プロフィール画像' %>
-    <%= f.file_field :musician_image, accept: 'image/*',placeholder: 'ファイルを選択' %>
+<main>
+  <div class="row">
+    <div class="col-4"></div>
+    <h2 class="col-4 bg-light text-center">ミュージシャン新規登録</h2>
+    <div class="col-4"></div>
   </div>
   
-  <div class="field">
-    <%= f.label :name, '名前' %>
-    <%= f.text_field :name, autofocus: true, autocomplete: "name",placeholder: 'ミュージシャン名' %>
+  <div class="text-center">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "musician/shared/error_messages", resource: resource %>
+    
+    <div class="form-group p-3">
+      <%= f.label :musician_image,'プロフィール画像:' %>
+      <%= f.file_field :musician_image, accept: 'image/*',placeholder: 'ファイルを選択' %>
+    </div>
+    
+    <div class="form-group p-3">
+      <%= f.label :name, '名前:' %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name",placeholder: 'ミュージシャン名' %>
+    </div>
+    
+    <div class="form-group p-3">
+      <%= f.label :introduction,'説明文:' %>
+      <%= f.text_area :introduction, autofocus: true, placeholder: '説明文'%>
+    </div>
+    
+    <div class="form-group p-3">
+      <%= f.label :email,"Eメール:" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" ,placeholder: 'xxx@xxx'%>
+    </div>
+    
+    <div class="form-group p-3">
+      <%= f.label :password,'パスワード:' %>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: '6文字以上' %>
+    </div>
+    
+    <div class="form-group p-3">
+      <%= f.label :password_confirmation,'パスワード:' %><br />
+       <em>(確認用)</em>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: '6文字以上' %>
+    </div>
+    
+    <div class="actions">
+      <%= f.submit "Sign up", class:"btn btn-primary"%>
+    </div>
+    
+    <%end%>
   </div>
   
-  <div class="field">
-    <%= f.label :introduction,'説明文' %>
-    <%= f.text_area :introduction, autofocus: true, placeholder: '説明文'%>
+  <div class="text-center">
+    登録済みの方は<%=link_to "こちら",new_musician_session_path%>
   </div>
+</main>
 
-  <div class="field">
-    <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" ,placeholder: 'xxx@xxx'%>
-  </div>
 
-  <div class="field">
-    <%= f.label :password,'パスワード' %>
-    <% if @minimum_password_length %>
-   
-    <% end %>
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: '6文字以上' %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation,'パスワード' %><br />
-     <em>(確認用)</em>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: '6文字以上' %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up", class:"btn btn-primary"%>
-  </div>
-<% end %>
-
-登録済みの方は<%=link_to "こちら",new_musician_session_path%>

@@ -10,7 +10,10 @@ class Event < ApplicationRecord
     
     validates :name, presence: true
     validates :introduction, presence: true
-    validates :datetime, presence: true
+    validates :start_month, presence: true
+    validates :start_day, presence: true
+    validates :start_hour, presence: true
+    validates :start_minutes, presence: true
     validates :place, presence: true
     validates :price, presence: true
     validates :capacity, presence: true
@@ -23,5 +26,9 @@ class Event < ApplicationRecord
     
     def favorite_by?(user)
         favorites.exists?(user_id: user.id)
+    end
+    
+    def datetime
+        start_month.to_s + "月" + start_day.to_s + "日" + start_hour.to_s + "時" + start_minutes.to_s + "分"
     end
 end

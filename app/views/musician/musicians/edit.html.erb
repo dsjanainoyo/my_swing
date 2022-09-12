@@ -1,26 +1,45 @@
 <%= render 'layouts/musician_header'%>
 
-<h2>ミュージシャン情報編集</h2>
-<%=link_to "退会する",musician_musicians_withdrawal_path,method: :patch,class:"btn btn-danger"%>
-
-<%=form_with model: @musician, url: musician_musician_path(@musician),method: :patch do |f|%>
-  <%=f.label :musician_image, "プロフィール画像"%>
-  <%=f.file_field :musician_image, accept: 'image/*',placeholder: 'ファイルを選択'%>
+<main>
+  <div class="row">
+    <div class="col-4"></div>
+      <h2 class="col-4 bg-light text-center">ミュージシャン情報編集</h2>
+    <div class="col-4"><%=link_to "退会する",musician_path,method: :patch,class:"btn btn-danger"%></div>
+  </div>
   
-  <%=f.label :name, "名前"%>
-  <%=f.text_field :name ,autofocus: true, autocomplete: "name",placeholder: 'ミュージシャン名' %>
-  
-  <%=f.label :introduction,"説明文"%>
-  <%=f.text_area :introduction, autofocus: true, placeholder: '説明文'%>
-  
-  <%=f.label :genre_item_ids, "ジャンル"%>
-  <%= f.collection_check_boxes(:genre_item_ids, GenreItem.all, :id, :name) do |genre| %>
-      <div class='form-check'>
-          <%= genre.label class: 'form-check-label' do %>
-              <%= genre.check_box class: 'form-check-input' %>
-              <%= genre.text %>
-          <% end %>
+  <div class="text-center">
+    <%=form_with model: @musician, url: musician_musician_path(@musician),method: :patch do |f|%>
+      <div class="form-group p-2">
+        <%=f.label :musician_image, "プロフィール画像:"%>
+        <%=f.file_field :musician_image, accept: 'image/*',placeholder: 'ファイルを選択'%>
       </div>
-  <% end %>
-  <%=f.submit '編集する',class:"succcess"%>
-<%end%>
+      
+      <div class="form-group p-2">
+        <%=f.label :name, "名前:"%>
+        <%=f.text_field :name ,autofocus: true, autocomplete: "name",placeholder: 'ミュージシャン名' %>
+      </div>
+      
+      <div class="form-group p-2">
+        <%=f.label :introduction,"説明文:"%>
+        <%=f.text_area :introduction, autofocus: true, placeholder: '説明文'%>
+      </div>
+      
+      <div class="form-group p-2">
+        <%=f.label :genre_item_ids, "ジャンル"%>
+        <%= f.collection_check_boxes(:genre_item_ids, GenreItem.all, :id, :name) do |genre| %>
+            <div class='form-check'>
+                <%= genre.label class: 'form-check-label' do %>
+                    <%= genre.check_box class: 'form-check-input' %>
+                    <%= genre.text %>
+                <% end %>
+            </div>
+        <% end %>
+      </div>
+      
+      <div class="text-center">
+        <%=f.submit '編集する',class:"succcess"%>
+      </div>
+      
+    <%end%>
+  </div>
+</main>

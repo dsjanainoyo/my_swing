@@ -1,39 +1,49 @@
 <%=render 'layouts/public_header'%>
 
-<h2>マイページ</h2>
+<main>
+  <div class="row">
+    <div class="col-4"></div>
+      <h2 class="col-4 bg-light text-center">マイページ</h2>
+    <div class="col-4"><%=link_to "編集",edit_public_user_path(current_user.id),class:"btn btn-success"%></div>
+  </div>
+  
+  <div class="text-center m-3">
+    <% if current_user.user_image.attached?%>
+      <%=image_tag current_user.user_image, size: '250x250'%>
+    <%else%>
+      <%=image_tag 'no_image',size: '250x250'%>
+    <%end%>  
+  </div>
+  
+  <div class="mx-auto w-50">
+    <table class="table text-center">
+        <tbody>
+            <tr>
+                <td class="text-center">名前</td>
+                <td class="text-center"><%=current_user.name%></td>
+            </tr>
+            
+            <tr>
+                <td class="text-center">フォロー中のミュージシャン</td>
+                <td class="text-center"><%=current_user.relationships.count%></td>
+            </tr>
+            
+            <tr>
+                <td class="text-center">いいねしたイベント</td>
+                <td class="text-center"><%=current_user.favorites.count%></td>
+            </tr>
+            
+            <tr>
+                <td class="text-center">好みのジャンル</td>
+                <td class="text-center">
+                    <% current_user.genre_items.each do |genre_item|%>
+                      <%=genre_item.name%>
+                    <%end%>
+                </td>
+            </tr>
+        </tbody>
+    </table>  
+  </div>
+</main>
 
-<%=link_to "編集",edit_public_user_path(current_user.id),class:"btn btn-success"%>
-
-<% if current_user.user_image.attached?%>
-  <%=image_tag current_user.user_image, size: '200x200'%>
-<%else%>
-  <%=image_tag 'no_image',size: '200x200'%>
-<%end%>
-
-<table class="table">
-    <tbody>
-        <tr>
-            <td>名前</td>
-            <td><%=current_user.name%></td>
-        </tr>
-        
-        <tr>
-            <td>フォロー中のミュージシャン</td>
-            <td><%=current_user.relationships.count%></td>
-        </tr>
-        
-        <tr>
-            <td>いいねしたイベント</td>
-            <td><%=current_user.favorites.count%></td>
-        </tr>
-        
-        <tr>
-            <td>好みのジャンル</td>
-            <td>
-                <% current_user.genre_items.each do |genre_item|%>
-                  <%=genre_item.name%>
-                <%end%>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    

@@ -1,27 +1,39 @@
 <%= render 'layouts/admin_header'%>
 
-<h2>ミュージシャン一覧</h2>
+<main>
+    <div class="row">
+      <div class="col-4"></div>
+      <h2 class="col-4 bg-light text-center">ミュージシャン一覧</h2>
+      <div class="col-4"></div>
+    </div>
 
-<table class="table">
-    <thead class="bg-light">
-        <tr>
-            <th>名前</th>
-            <th>投稿イベント</th>
-            <th>ジャンル</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @musicians.each do |musician|%>
-          <tr>
-              <td><%=link_to musician.name,admin_musician_path(musician.id)%></td>
-              <td><%=musician.events.count%></td>
-              <td>
-                  <%musician.genre_items.each do |genre_item|%>
-                    <%=genre_item.name%>
-                  <%end%>
-              </td>
-          </tr>
-        <%end%>
-    </tbody>
-</table>
-<%= paginate @musicians%>
+    <table class="table justify-content-center mx-auto w-75">
+        <thead class="bg-light">
+            <tr>
+                <th class="text-center">名前</th>
+                <th class="text-center">投稿イベント</th>
+                <th class="text-center">ジャンル</th>
+                <th class="text-center">退会ステータス</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @musicians.each do |musician|%>
+              <tr>
+                  <td class="text-center"><%=link_to musician.name,admin_musician_path(musician.id)%></td>
+                  <td class="text-center"><%=musician.events.count%></td>
+                  <td class="text-center">
+                      <%musician.genre_items.each do |genre_item|%>
+                        <%=genre_item.name%>
+                      <%end%>
+                  </td>
+                  <td class="text-center"><%=musician.is_deleted_i18n%></td>
+              </tr>
+            <%end%>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <%= paginate @musicians%>
+    </div>
+    
+
+</main>

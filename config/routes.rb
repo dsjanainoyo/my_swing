@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   
   namespace :musician do
     resources :musicians, only: [:show,:edit,:update]
-    patch 'musicians/withdrawal'=>'musicians#withdrawal'
+    patch 'musicians/:id/withdrawal'=>'musicians#withdrawal'
     resources :events, only: [:index,:show,:new,:create,:edit,:update] do
       resources :comments, only: [:create]
     end

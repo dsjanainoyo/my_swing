@@ -72,7 +72,10 @@ ActiveRecord::Schema.define(version: 2022_08_30_150251) do
     t.integer "musician_id", null: false
     t.string "name", null: false
     t.string "introduction", null: false
-    t.string "datetime", null: false
+    t.integer "start_month", default: 1, null: false
+    t.integer "start_day", default: 1, null: false
+    t.integer "start_hour", default: 0, null: false
+    t.integer "start_minutes", default: 0, null: false
     t.string "place", null: false
     t.integer "price", null: false
     t.integer "capacity", null: false
@@ -106,7 +109,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_150251) do
     t.string "introduction", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.boolean "is_deleted", default: false, null: false 
+    t.boolean "is_deleted", default: false, null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"

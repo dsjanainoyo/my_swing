@@ -1,23 +1,37 @@
 <%= render 'layouts/admin_header'%>
 
-<h2>ジャンル追加</h2> 
-
-<%=form_with model: @genre_item, url: admin_genre_items_path, local: true do |f|%>
-  <%=f.text_field :name, placeholder: "ジャンル名"%>
-  <%=f.submit '追加',class:"btn btn-success"%>
-<%end%>
-
-<table>
-    <thead class="bg-light">
-        <th>ジャンル名</th>
-    </thead>
-    <tbody>
-        <% @genre_items.each do |genre_item|%>
-          <tr>
-              <td><%=genre_item.name%></td>
-              <td><%=link_to "編集",edit_admin_genre_path(genre_item.id),class:"btn btn-success"%></td>
-          </tr>
+<main>
+    <div class="row">
+        <div class="col-4"></div>
+          <h2 class="col-4 bg-light text-center">ジャンル</h2>
+        <div class="col-4"></div>
+    </div>
+    
+    <div class="text-center">
+        <%=form_with model: @genre_item, url: admin_genre_items_path, local: true do |f|%>
+          <%=f.text_field :name, placeholder: "ジャンル名"%>
+          <%=f.submit '追加',class:"btn btn-success"%>
         <%end%>
-    </tbody>
-</table>
-<%= paginate @genre_items%>
+    </div>
+    
+    <div class="mx-auto w-25">
+        <table class="text-center">
+            <thead class="bg-light">
+                <th class="text-center">ジャンル名</th>
+            </thead>
+            <tbody>
+                <% @genre_items.each do |genre_item|%>
+                  <tr>
+                      <td class="text-center"><%=genre_item.name%></td>
+                      <td class="text-center"><%=link_to "編集",edit_admin_genre_path(genre_item.id),class:"btn btn-success"%></td>
+                  </tr>
+                <%end%>
+            </tbody>
+        </table>
+        <%= paginate @genre_items%>
+    </div>
+</main>
+
+        
+
+    

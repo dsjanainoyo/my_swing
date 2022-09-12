@@ -5,6 +5,7 @@ class Public::EventsController < ApplicationController
     else
       @events=Event.page(params[:page]).per(6)
     end
+    
   end
 
   def show

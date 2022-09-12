@@ -1,20 +1,30 @@
 <%=render 'layouts/musician_header'%>
 
-<h2>フォロワー一覧</h2>
-
-<table>
-    <thead class="bg-light">
-        <tr>
-            <th>フォロワー名</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
+<main>
+  <div class="row">
+    <div class="col-4"></div>
+      <h2 class="col-4 bg-light text-center">フォロワー一覧</h2>
+    <div class="col-4"></div>
+  </div>
+  
+  <div class="mx-auto w-50">
+    <table class="table text-center">
+        <thead class="bg-light">
+            <tr>
+                <th class="text-center">フォロワー名</th>
+            </tr>
+        </thead>
+        <tbody>
             <% @followers.each do |follower|%>
-              <td><%=follower.name%></td>
+                <tr>
+                  <td><%=follower.name%></td>
+                </tr>
             <%end%>
-        </tr>
-        
-    </tbody>
-</table>
-<%= paginate @followers%>
+        </tbody>
+    </table>
+    
+    <div class="text-center">
+        <%= paginate @followers%>  
+    </div>
+  </div>
+</main>

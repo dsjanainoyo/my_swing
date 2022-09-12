@@ -13,6 +13,12 @@ class Musician::MusiciansController < ApplicationController
     redirect_to musician_musician_path(current_musician)
   end
   
+  def withdrawal
+    musician=Musician.find(params[:id])
+    musician.update(is_deleted: true)
+    redirect_to root_path
+  end
+  
   private
   def musician_params
     params.require(:musician).permit(:name,:introduction,:musician_image, genre_item_ids: [])

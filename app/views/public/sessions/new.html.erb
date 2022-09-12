@@ -1,22 +1,40 @@
 <%= render 'layouts/public_header'%>
 
-<h2>ユーザーログイン</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email,'メールアドレス' %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" ,palaceholder: 'xxx@xxx'%>
+<main>
+  
+  <div class="row">
+    <div class="col-4"></div>
+    <h2 class="col-4 bg-light text-center">ユーザーログイン</h2>
+    <div class="col-4"></div>
+  </div>
+  
+  <div class="text-center">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
+    
+    <div class="form-group p-2">
+      <div class="field">
+        <%= f.label :email,'メールアドレス:' %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" ,palaceholder: 'xxx@xxx'%>
+      </div>
+    </div>
+    
+    <div class="form-group p-2">
+      <div class="field">
+        <%= f.label :password ,'パスワード:'%>
+        <%= f.password_field :password, autocomplete: "current-password" ,placeholder: '6文字以上'%>
+      </div>
+    </div>
+    
+    <div class="actions">
+      <%= f.submit "Log in",class:"btn btn-primary" %>
+    </div>
+    
+    <div class="text-center p-3">
+      登録がまだの方は<%=link_to "こちら",new_musician_registration_path%>
+    </div>
+    
+    <% end %>
   </div>
 
-  <div class="field">
-    <%= f.label :password ,'パスワード'%>
-    <%= f.password_field :password, autocomplete: "current-password" ,placeholder: '6文字以上'%>
-  </div>
-
-
-  <div class="actions">
-    <%= f.submit "Log in",class:"btn btn-primary" %>
-  </div>
-<% end %>
-
-登録がまだの方は<%=link_to "こちら",new_musician_registration_path%>
+</main>

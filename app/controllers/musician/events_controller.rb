@@ -33,6 +33,6 @@ class Musician::EventsController < ApplicationController
   
   private
   def event_params
-    params.require(:event).permit(:name,:musician_id,:introduction,:datetime,:place,:price,:capacity,:seating_status,:event_image,genre_item_ids: [])
+    params.require(:event).permit(:name,:musician_id,:introduction,:start_month,:start_day,:start_hour,:start_minutes,:place,:price,:capacity,:seating_status,:event_image,genre_item_ids: [])
   end
 end
