@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_150251) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text "comment"
+    t.text "comment", null: false
     t.integer "musician_id"
     t.integer "user_id"
     t.integer "event_id", null: false
@@ -106,7 +106,7 @@ ActiveRecord::Schema.define(version: 2022_08_30_150251) do
 
   create_table "musicians", force: :cascade do |t|
     t.string "name", null: false
-    t.string "introduction", null: false
+    t.string "introduction"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.boolean "is_deleted", default: false, null: false

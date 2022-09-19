@@ -16,6 +16,9 @@ class User < ApplicationRecord
   has_many :genre_items, through: :user_genres, dependent: :destroy
   has_many :musicians, through: :relationships, dependent: :destroy
   
+  validates :name, presence: true
+  validates :email, presence: true
+  
   enum is_deleted:{
     validity: false,
     withdrawal: true

@@ -8,6 +8,7 @@
     </div>
     
     <dix class="text-center">
+      <%=alert%>
       <%= form_with model: @genre_item, url: admin_genre_item_path(@genre_item),method: :patch do |f|%>
         <%=f.text_field :name%></br>
         <%=f.submit '編集する',class:"btn btn-success m-5"%>

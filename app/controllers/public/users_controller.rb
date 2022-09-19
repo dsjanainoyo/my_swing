@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  include Devise::Controllers::Helpers
   def show
   end
 
@@ -7,15 +8,21 @@ class Public::UsersController < ApplicationController
   end
 
   def update
-    user=User.find(current_user.id)
-    user.update(user_params)
-    redirect_to public_user_path(current_user.id)
+    @user=User.find(current_user.id)
+    if  @user.update(user_params)
+       redirect_to public_user_path(@user.id)
+    else
+      render :edit
+    end
+   
+   
   end
   
   def withdrawal
     user=User.find(params[:id])
     user.update(is_deleted: true)
-    redirect_to root_path(user)
+    sign_out current_user
+    redirect_to root_path
   end
   
   

@@ -7,6 +7,13 @@ class Musician::SessionsController < Devise::SessionsController
   def after_sign_in_path_for(resource)
     musician_events_path(resource)
   end
+  
+  def delete
+      if current_musician.is_deleted == "withdrawal"
+          sign_out current_musician
+          redirect_to root_path
+      end
+  end
 
   # GET /resource/sign_in
   # def new
@@ -36,7 +43,7 @@ class Musician::SessionsController < Devise::SessionsController
    end
    
    end
-
+   
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])

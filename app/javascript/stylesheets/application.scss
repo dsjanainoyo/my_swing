@@ -1,2 +1,46 @@
 @import '~bootstrap/scss/bootstrap';
 
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+}
+
+ header{
+  height:300px;
+    background-image: url("../images/header_bg_image.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center bottom 30%;
+ }
+ 
+ 
+ .card-deck .card{
+    flex: initial;
+ }
+
+ main{
+  width:80% ;
+  margin-left:auto;
+  margin-right:auto;
+ }
+ 
+ .pagination>li>a {          
+  border: none;     
+  color: #696969;   
+}
+
+.pagination>.active>a {     
+  background: #93c9ff;     
+  border-radius: 15px;     
+}
+
+.pagination>li>a:hover {        
+  border-radius: 15px;   
+}
+ 
+ footer{
+  height: 200px;
+  background-color: #BDB76B;
+ }
+ 

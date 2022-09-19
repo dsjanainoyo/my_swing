@@ -7,13 +7,30 @@ class Public::CommentsController < ApplicationController
     comment.musician_id=current_musician&.id
 
     if comment.user_id
-      comment.save
-      redirect_to public_event_path(event)
+     
+       if comment.save
+        redirect_to public_event_path(event)
+       else 
+         redirect_to public_event_path(event), alert: "コメントを入力してください"
+         
+        #@error_comment=comment
+        #redirect_to public_event_path(event)
+       end
     else
       
-      comment.save
-      redirect_to musician_event_path(event)
-    end 
+      if comment.save
+        redirect_to musician_event_path(event)
+      else 
+        @error_comment=comment
+        redirect_to public_event_path(event)
+      end
+    end
+    
+  end
+  
+  def destroy
+    Comment.find(params[:id]).destroy
+    redirect_to public_event_path(params[:event_id])
   end
   
   private

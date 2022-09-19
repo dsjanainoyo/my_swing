@@ -8,10 +8,12 @@
     <div class="col-4"></div>
   </div>
   
+  <p class="notice text-center"><%= notice %></p>
+  <p class="alert text-center"><%= alert %></p>
+  
   <div class="text-center">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <%= render "public/shared/error_messages", resource: resource %>
-    
+
     <div class="form-group p-2">
       <div class="field">
         <%= f.label :email,'メールアドレス:' %>

@@ -7,7 +7,9 @@ Rails.application.routes.draw do
 
  namespace :admin do
     resources :genres, only: [:index,:edit]
-    resources :events, only: [:index,:show,:destroy]
+    resources :events, only: [:index,:show,:destroy] do
+      resources :comments, only: [:destroy]
+    end
     resources :users, only: [:index,:show] 
     patch 'users/:id/withdrawal' => 'users#withdrawal', as: 'users_withdrawal'
     resources :musicians, only: [:index,:show] 
@@ -20,8 +22,8 @@ Rails.application.routes.draw do
   namespace :musician do
     resources :musicians, only: [:show,:edit,:update]
     patch 'musicians/:id/withdrawal'=>'musicians#withdrawal'
-    resources :events, only: [:index,:show,:new,:create,:edit,:update] do
-      resources :comments, only: [:create]
+    resources :events, only: [:index,:show,:new,:create,:edit,:update,:destroy] do
+      resources :comments, only: [:create,:destroy]
     end
     get 'followers' => 'relationships#followers', as: 'followers'
   end
@@ -31,7 +33,7 @@ Rails.application.routes.draw do
     patch 'users/:id/withdrawal'=>'users#withdrawal'
     resources :events, only: [:index,:show] do 
       resources :reservations, only: [:new,:create,:destroy]
-      resources :comments, only: [:create]
+      resources :comments, only: [:create,:destroy]
       resource :favorites, only: [:create,:destroy]
     end
     get 'reservations/index'

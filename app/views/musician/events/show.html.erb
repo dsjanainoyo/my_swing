@@ -50,4 +50,75 @@
         </tbody>
     </table>  
   </div>
+  
+  <div class="col-4">
+    <h3 class="text-center border border-dark border-top-0 border-right-0 border-left-0">コメント</h3>
+  </div>
+  
+  
+  <% if current_musician.present?%>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <%=alert%>
+           <%=form_with model: [@event,@comment],url: musician_event_comments_path(@event) do |f|%>
+            <%=f.text_area :comment,placeholder: 'コメントを記述'%>
+            <%=f.submit 'コメント',class:"btn btn-success"%>
+          <%end%>
+        </div>
+        
+        <div class="col-6">
+           <% @event.comments.each do |comment|%>
+             <div class="border">
+               <% if comment.musician==current_musician%>
+               
+                <div class="d-flex align-items-center">
+                  <% if comment.musician.musician_image.attached?%>
+                    <%=image_tag comment.musician.musician_image,size: '100x100',class:"img-thumbnail"%>
+                  <%else%>
+                    <%=image_tag 'no_image',size: '100x100', class:"img-thumbnail"%>
+                  <%end%>
+                
+           
+                  <div class="text-center">
+                    <h5><%=comment.musician.name%></h5></br>
+                    <p><%=comment.comment%></p></br>
+                    <p class="text-secondary"><%=comment.created_at.strftime('%Y年%m月%d日')%></p>
+                    <%=link_to "削除",musician_event_comment_path(@event,comment),method: :delete%>
+                  </div>
+                </div>
+                
+                
+                <%elsif comment.user.present?%>
+                <div class="d-flex align-items-center">
+                  <% if comment.user.user_image.attached?%>
+                    <%=image_tag comment.user.user_image,size: '100x100', class:"img-thumbnail"%>
+                  <%else%>
+                    <%=image_tag 'no_image',size: '100x100', class:"img-thumbnail"%>
+                  <%end%>
+                  
+                  <div class="text-center">
+                    <h5><%=comment.user.name%></h5>
+                    <p><%=comment.comment%></p>
+                    <p class="text-secondary"><%=comment.created_at.strftime('%Y年%m月%d日')%>  </p>
+                  </div>
+
+                </div>
+                
+              <%else%>
+              
+                <p>コメントがありません</p>
+              <%end%>
+              
+             </div>
+              
+          <%end%>
+        </div>
+      </div>
+    </div>
+        
+  <%else%>
+    <p>コメントするにはログインしてください</p>
+  <%end%>
+  
 </main>

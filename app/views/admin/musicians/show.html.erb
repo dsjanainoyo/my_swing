@@ -57,7 +57,7 @@
         
     <div class="text-center">
         <%if @musician.is_deleted=="validity"%>
-          <%=link_to "退会する",admin_musicians_withdrawal_path(@musician),method: :patch,class:"btn btn-danger"%>
+          <%=link_to "退会する",admin_musicians_withdrawal_path(@musician),method: :patch, data: {confirm: "本当に退会しますか？" },class:"btn btn-danger"%>
         <%else%>
           <p class="btn btn-secondary">無効</p>
         <%end%>

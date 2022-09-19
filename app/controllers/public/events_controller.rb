@@ -1,7 +1,7 @@
 class Public::EventsController < ApplicationController
   def index
     if params[:event_key].present?
-      @events=Event.where('name LIKE ? OR introduction LIKE ?', "%#{params[:event_key]}%", "%#{params[:event_key]}%")
+      @events=Event.where('name LIKE ? OR introduction LIKE ?', "%#{params[:event_key]}%", "%#{params[:event_key]}%").page(params[:page]).per(6)
     else
       @events=Event.page(params[:page]).per(6)
     end

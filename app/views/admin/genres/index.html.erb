@@ -7,7 +7,10 @@
         <div class="col-4"></div>
     </div>
     
+  
+    
     <div class="text-center">
+        <%=alert%>
         <%=form_with model: @genre_item, url: admin_genre_items_path, local: true do |f|%>
           <%=f.text_field :name, placeholder: "ジャンル名"%>
           <%=f.submit '追加',class:"btn btn-success"%>

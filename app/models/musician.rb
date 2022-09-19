@@ -18,6 +18,8 @@ class Musician < ApplicationRecord
   
   has_many :users, through: :relationships, dependent: :destroy
   
+  validates :name, presence: true
+  
   enum is_deleted:{
     validity: false,
     withdrawal: true

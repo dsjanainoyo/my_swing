@@ -5,6 +5,7 @@ class Musician::EventsController < ApplicationController
 
   def show
     @event=Event.find(params[:id])
+    @comment=Comment.new
   end
 
   def new
@@ -15,7 +16,7 @@ class Musician::EventsController < ApplicationController
     @event=Event.new(event_params)
     @event.musician_id=current_musician.id
     if @event.save
-      redirect_to musician_events_path
+      redirect_to musician_event_path(@event)
     else
       render :new
     end
@@ -26,9 +27,12 @@ class Musician::EventsController < ApplicationController
   end
 
   def update
-    event=Event.find(params[:id])
-    event.update(event_params)
-    redirect_to musician_event_path(event.id)
+    @event=Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to musician_event_path(@event.id)
+    else
+      render :edit
+    end
   end
   
   private

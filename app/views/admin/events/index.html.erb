@@ -7,8 +7,8 @@
     <div class="col-4"></div>
   </div>
   
-    <div class="">
-        <table class="table justify-content-center m-auto">
+    <div class="mx-auto w-50">
+        <table class="table text-center">
             <thead class="bg-light">
                 <th class="text-center">イベント名</th>
                 <th class="text-center">日時</th>
@@ -22,8 +22,10 @@
                       <td class="text-center"><%=link_to event.name, admin_event_path(event)%></td>
                       <td class="text-center"><%=event.datetime%></td>
                       <td class="text-center">
+                        
+                          <% @total_headcount=0 %>
                           <%event.reservations.each do |reservation|%>
-                            <% @total_headcount=@total_headcount+reservation.headcount%>
+                            <%@total_headcount += reservation.headcount%>
                           <%end%>
                           <%=@total_headcount%>
                           /<%=event.capacity%>

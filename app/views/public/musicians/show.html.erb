@@ -53,45 +53,43 @@
                 </tr>
             </tbody>
         </table>
+      </div>
         
-        
-            <div class="card-deck justify-content-center">
-                <% @musician.events.each do |event|%>
-                
-                  <div class="card bg-light w-100">
-                    <%= link_to public_event_path(event.id) do %>
-                    
-                        <h4 class="card-header text-center"><%=event.name%></h4>
-                        
-                        <div class="card-body">
-                          <div class="text-center">
-                            <% if event.event_image.attached?%>
-                              <%=image_tag event.event_image,width:'100%',height:'100%'%>
-                            <%else%>
-                              <%=image_tag 'no_image',width:'100%',height:'100%'%>
-                            <%end%>
-                            
-                            <p><%=event.musician.name%></p>
-                            <p><%=event.datetime%></p>
-                            
-                            <p>
-                               <% event.genre_items.first(3).each do |genre_item|%>
-                                 <div class="m-1 p-1 border">
-                                   <%=genre_item.name%>
-                                 </div>
-                               <%end%>  
-                            </p>
-                          </div>
-                            
-                      </div>
-                    <%end%>
-                    <div class="card-footer">
-                      <%=event.created_at.strftime('%Y年%m月%d日%H時%M分')%>
-                    </div>
-                  </div>
-                  
+  <div class="card-deck justify-content-center">
+    <% @musician_events.each do |event|%>
+      <div class="card bg-light  col-3 m-3" style="width:50%" "height:50%">
+        <%= link_to public_event_path(event.id) do %>
+            <h4 class="card-header"><%=event.name%></h4>
+            
+            <div class="card-body">
+              <div class="text-center">
+                <% if event.event_image.attached?%>
+                  <%=image_tag event.event_image,width:'100%',height:'100%'%>
+                <%else%>
+                  <%=image_tag 'no_image',width:'100%',height:'100%'%>
                 <%end%>
+                
+                <p><%=event.musician.name%></p>
+                <p><%=event.datetime%></p>
+                
+                <p>
+                   <% event.genre_items.first(3).each do |genre_item|%>
+                     <div class="m-1 p-1 border">
+                       <%=genre_item.name%>
+                     </div>
+                   <%end%>  
+                </p>
+              </div>
             </div>
-          </div>
-
+        <%end%>
+        <div class="card-footer">
+          <%=event.created_at.strftime('%Y年%m月%d日%H時%M分')%>
+        </div>
+      </div>
+    <%end%>
+    </div>
+    
+    <div class="text-center">
+      <%= paginate @musician_events%>
+    </div>
 </main>

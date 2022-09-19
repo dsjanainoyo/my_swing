@@ -20,6 +20,7 @@
             
             <tbody>
                 <% @reservations.each do |reservation|%>
+                
                   <tr>
                       <td class="text-center"><%=link_to reservation.event.name,public_event_path(reservation.event.id)%></td>
                       <td class="text-center"><%=reservation.headcount%></td>

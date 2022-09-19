@@ -1,36 +1,50 @@
 <%= render 'layouts/public_header'%>
 
-<h2>いいねしたイベント</h2>
-
-<div class="card-deck">
+<main>
+    <div class="row">
+        <div class="col-4"></div>
+          <h2 class="col-4 bg-light text-center">いいねしたイベント</h2>
+        <div class="col-4"></div>
+    </div>
+    
+  <div class="card-deck justify-content-center">
     <% @events.each do |event|%>
-      <div class="card bg-light">
+      <div class="card bg-light col-3 m-3" style="width:50%" "height:50%">
         <%= link_to public_event_path(event.id) do %>
+            <h4 class="card-header"><%=event.name%></h4>
+            
             <div class="card-body">
+              <div class="text-center">
                 <% if event.event_image.attached?%>
-                  <%=image_tag event.event_image,size: '100x100'%>
+                  <%=image_tag event.event_image,width:'100%',height:'100%'%>
                 <%else%>
-                  <%=image_tag 'no_image'%>
+                  <%=image_tag 'no_image',width:'100%',height:'100%'%>
                 <%end%>
-                <h4 class="card-title"><%=event.name%></h4>
                 
                 <p><%=event.musician.name%></p>
                 <p><%=event.datetime%></p>
                 
                 <p>
-                   <% event.genre_items.each do |genre_item|%>
-                     <div class="border">
+                   <% event.genre_items.first(3).each do |genre_item|%>
+                     <div class="m-1 p-1 border">
                        <%=genre_item.name%>
                      </div>
-                   <%end%>
+                   <%end%>  
                 </p>
-                
-                
-                <%=event.created_at%>
+              </div>
             </div>
         <%end%>
+        <div class="card-footer">
+          <%=event.created_at.strftime('%Y年%m月%d日%H時%M分')%>
+        </div>
       </div>
     <%end%>
-</div>
+  </div>
+  
+  <div class="row">
+    <div class="text-center">
+      <%= paginate @events%>
+    </div>
+  </div>
+</main>
 
-<%= paginate @events%>

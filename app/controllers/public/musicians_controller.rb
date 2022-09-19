@@ -1,7 +1,7 @@
 class Public::MusiciansController < ApplicationController
   def index
     if params[:musician_key].present?
-      @musicians=Musician.where('name LIKE ? OR introduction LIKE ?', "%#{params[:musician_key]}%", "%#{params[:musician_key]}%")
+      @musicians=Musician.where('name LIKE ? OR introduction LIKE ?', "%#{params[:musician_key]}%", "%#{params[:musician_key]}%").page(params[:page]).per(8)
     else
       @musicians=Musician.page(params[:page]).per(8)
     end
@@ -9,6 +9,7 @@ class Public::MusiciansController < ApplicationController
 
   def show
     @musician=Musician.find(params[:id])
+    @musician_events=@musician.events.page(params[:page]).per(6)
   end
   
   private

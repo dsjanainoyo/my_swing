@@ -8,9 +8,12 @@ class Musician::MusiciansController < ApplicationController
   end
 
   def update
-    musician=current_musician
-    musician.update(musician_params)
-    redirect_to musician_musician_path(current_musician)
+    @musician=current_musician
+    if @musician.update(musician_params)
+      redirect_to musician_musician_path(@musician)
+    else
+      render :edit
+    end
   end
   
   def withdrawal

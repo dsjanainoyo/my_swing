@@ -57,7 +57,7 @@
     
     <div class="text-center">
         <%if @user.is_deleted== "validity"%>
-          <%=link_to "退会する",admin_users_withdrawal_path(@user.id),method: :patch,class:"btn btn-danger"%>
+          <%=link_to "退会する",admin_users_withdrawal_path(@user.id),method: :patch, data: {confirm: "本当に退会しますか？" },class:"btn btn-danger"%>
         <%else%>
           <p class="btn btn-secondary">無効</p>
         <%end%>

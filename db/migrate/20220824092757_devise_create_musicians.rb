@@ -5,7 +5,7 @@ class DeviseCreateMusicians < ActiveRecord::Migration[6.1]
     create_table :musicians do |t|
       ## Database authenticatable
       t.string :name, null: false
-      t.string :introduction, null: false
+      t.string :introduction
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
       t.boolean :is_deleted, null: false, default: false

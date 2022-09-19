@@ -36,7 +36,7 @@
         <tbody>
             <tr>
                 <td class="text-center">ミュージシャン名</td>
-                <td class="text-center"><%=@event.musician.name%></td>
+                <td class="text-center"><%=link_to @event.musician.name, public_musician_path(@event.musician.id)%></td>
             </tr>
             
             <tr>
@@ -63,7 +63,7 @@
             
             <tr>
                 <td class="text-center">予約ステータス</td>
-                <td class="text-center"><%=@event.seating_status%></td>
+                <td class="text-center"><%=@event.seating_status_i18n%></td>
             </tr>
         </tbody>
     </table>
@@ -75,10 +75,13 @@
   </div>
   
   
+  
+  
   <% if current_user.present?%>
     <div class="container">
       <div class="row">
         <div class="col-6">
+          <%= alert %>
            <%=form_with model: [@event,@comment],url: public_event_comments_path(@event) do |f|%>
             <%=f.text_area :comment,placeholder: 'コメントを記述'%>
             <%=f.submit 'コメント',class:"btn btn-success"%>
@@ -102,6 +105,7 @@
                     <h5><%=comment.user.name%></h5></br>
                     <p><%=comment.comment%></p></br>
                     <p class="text-secondary"><%=comment.created_at.strftime('%Y年%m月%d日')%></p>
+                    <%=link_to "削除",public_event_comment_path(@event,comment),method: :delete%>
                   </div>
                 </div>
                 
