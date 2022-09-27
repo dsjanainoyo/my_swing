@@ -2,9 +2,9 @@
 
 <main>
   <div class="row">
-    <div class="col-4"></div>
-      <h2 class="col-4 bg-light text-center"><%=@event.name%></h2>
-    <div class="col-4"><%=link_to "編集",edit_musician_event_path(@event.id),class: "btn btn-success"%></div>
+    <div class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12"></div>
+      <h2 class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12 bg-light text-center"><%=@event.name%></h2>
+    <div class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12"><%=link_to "編集",edit_musician_event_path(@event.id),class: "btn btn-success"%></div>
   </div>
   
   <div class="text-center">
@@ -15,7 +15,7 @@
     <%end%>
   </div>
   
-  <div class="mx-auto w-50">
+  <div class="mx-auto">
     <table class="table text-center">
         <tbody>
             <tr>
@@ -51,7 +51,7 @@
     </table>  
   </div>
   
-  <div class="col-4">
+  <div class="col-xs-12 col-sm-4">
     <h3 class="text-center border border-dark border-top-0 border-right-0 border-left-0">コメント</h3>
   </div>
   
@@ -59,7 +59,7 @@
   <% if current_musician.present?%>
     <div class="container">
       <div class="row">
-        <div class="col-6">
+        <div class="col-xs-12 col-sm-6">
           <%=alert%>
            <%=form_with model: [@event,@comment],url: musician_event_comments_path(@event) do |f|%>
             <%=f.text_area :comment,placeholder: 'コメントを記述'%>
@@ -67,7 +67,7 @@
           <%end%>
         </div>
         
-        <div class="col-6">
+        <div class="col-xs-12 col-sm-6">
            <% @event.comments.each do |comment|%>
              <div class="border">
                <% if comment.musician==current_musician%>

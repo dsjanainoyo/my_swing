@@ -45,7 +45,7 @@
             </tr>
             
             <tr>
-                <td class="text-center">日時</td>
+                <td nowrap class="text-center">日時</td>
                 <td class="text-center"><%=@event.datetime%></td>
             </tr>
             
@@ -56,9 +56,11 @@
             
             <tr>
                 <td class="text-center">ジャンル</td>
-                <% @event.genre_items.each do |genre_item|%>
-                    <td class="text-center"><%=genre_item.name%></td>
-                <%end%>
+                <td class="text-center">
+                  <% @event.genre_items.each do |genre_item|%>
+                      <span class="text-center p-1" style="display: block;"><%=genre_item.name%></span>
+                  <%end%>
+                </td>
             </tr>
             
             <tr>
@@ -70,7 +72,7 @@
   </div>
   
   
-  <div class="col-4">
+  <div class="col-xs-12 col-sm-4">
     <h3 class="text-center border border-dark border-top-0 border-right-0 border-left-0">コメント</h3>
   </div>
   
@@ -80,7 +82,7 @@
   <% if current_user.present?%>
     <div class="container">
       <div class="row">
-        <div class="col-6">
+        <div class="col-xs-12 col-sm-6">
           <%= alert %>
            <%=form_with model: [@event,@comment],url: public_event_comments_path(@event) do |f|%>
             <%=f.text_area :comment,placeholder: 'コメントを記述'%>
@@ -88,7 +90,7 @@
           <%end%>
         </div>
         
-        <div class="col-6">
+        <div class="col-xs-12 col-sm-6">
            <% @event.comments.each do |comment|%>
              <div class="border">
                <% if comment.user==current_user%>
@@ -124,11 +126,7 @@
                   </div>
 
                 </div>
-                  
           
-              <%else%>
-              
-                <p>コメントがありません</p>
               <%end%>
               
              </div>

@@ -2,9 +2,9 @@
 
 <main>
   <div class="row">
-    <div class="col-4"></div>
-      <h2 class="col-4 bg-light text-center">ユーザー情報編集</h2>
-    <div class="col-4"><%=link_to "退会する",public_path, method: :patch, data: {confirm: "本当に退会しますか？" },class:"btn btn-danger"%></div>
+    <div class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12"></div>
+      <h2 class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12 bg-light text-center">ユーザー情報編集</h2>
+    <div class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12"><%=link_to "退会する",public_path, method: :patch, data: {confirm: "本当に退会しますか？" },class:"btn btn-danger"%></div>
   </div>
   
   <div class="text-center">
@@ -32,7 +32,7 @@
       </div>
       
       <div class="form-group p-2">
-        <%=f.label :genre_item_ids, "ジャンル"%>
+        <%=f.label :genre_item_ids, "ジャンル:"%>
         <%= f.collection_check_boxes(:genre_item_ids, GenreItem.all, :id, :name) do |genre| %>
           <div class='form-check'>
               <%= genre.label class: 'form-check-label' do %>

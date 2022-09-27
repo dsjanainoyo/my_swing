@@ -2,9 +2,9 @@
 
 <main>
     <div class="row">
-      <div class="col-4"></div>
-        <h2 class="col-4 bg-light text-center">マイページ</h2>
-      <div class="col-4"><%=link_to "編集",edit_musician_musician_path(current_musician),class:"btn btn-success"%></div>
+      <div class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12"></div>
+        <h2 class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12 bg-light text-center">マイページ</h2>
+      <div class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12"><%=link_to "編集",edit_musician_musician_path(current_musician),class:"btn btn-success"%></div>
     </div>
     
     <div class="text-center m-3">
@@ -30,7 +30,7 @@
                     <td class="text-center">ジャンル</td>
                     <td class="text-center">
                         <% current_musician.genre_items.each do |genre_item|%>
-                          <%=genre_item.name%>
+                          <span class="text-center p-1" style="display: block;"><%=genre_item.name%></span>
                         <%end%>
                     </td>
                 </tr>

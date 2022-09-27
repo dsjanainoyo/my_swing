@@ -2,13 +2,13 @@
 
 <main>
     <div class="row">
-        <div class="col-4"></div>
-          <h2 class="col-4 bg-light text-center">フォローしたミュージシャン</h2>
-        <div class="col-4"></div>
+        <div class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12"></div>
+          <h2 class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12 bg-light text-center">フォローしたミュージシャン</h2>
+        <div class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12"></div>
     </div>    
     
     
-    <div class="mx-auto w-50">
+    <div class="mx-auto">
         <table class="table text-center">
             <thead class="bg-light">
                 <tr>
@@ -23,9 +23,12 @@
                   <tr>
                       <td class="text-center"><%=link_to musician.name,public_musician_path(musician)%></td>
                       <td class="text-center"><%=musician.events.count%></td>
-                      <% musician.genre_items.each do |genre_item|%>
-                        <td class="text-center"><%=genre_item.name%></td>
-                      <%end%>
+                      <td>
+                          <% musician.genre_items.each do |genre_item|%>
+                            <span class="text-center p-2" style="display: block;"><%=genre_item.name%></span>
+                          <%end%>   
+                      </td>
+                      
                   </tr>
                 <%end%>
             </tbody>

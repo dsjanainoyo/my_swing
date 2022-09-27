@@ -2,9 +2,9 @@
 
 <main>
     <div class="row">
-      <div class="col-4"></div>
-      <h2 class="col-4 bg-light text-center"><%=@musician.name%>のプロフィール</h2>
-      <div class="col-4">
+      <div class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12"></div>
+      <h2 class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12 bg-light text-center"><%=@musician.name%>のプロフィール</h2>
+      <div class="col-xl-4 col-lg-4 col-xs-12 col-sm-12 col-md-12">
           <% if current_user.present?%>
             <% if current_user.following?(@musician)%>
               <%=link_to "フォローをやめる", public_musician_relationship_path(@musician.id),method: :delete,class:"btn btn-secondary"%>
@@ -29,66 +29,70 @@
         <table class="table text-center">
             <tbody>
                 <tr>
-                    <td>名前</td>
-                    <td><%=@musician.name%></td>
+                    <td class="text-center">名前</td>
+                    <td class="text-center"><%=@musician.name%></td>
                 </tr>
                 
                 <tr>
-                    <td>説明文</td>
-                    <td><%=@musician.introduction%></td>
+                    <td class="text-center">説明文</td>
+                    <td class="text-center"><%=@musician.introduction%></td>
                 </tr>
                 
                 <tr>
-                    <td>ジャンル</td>
-                    <td>
+                    <td class="text-center">ジャンル</td>
+                    <td class="text-center">
                         <% @musician.genre_items.each do |genre_item|%>
-                          <td><%=genre_item.name%></td>
+                          <span class="text-center" style="display: block;"><%=genre_item.name%></span>
                         <%end%>
                     </td>
                 </tr>
                 
                 <tr>
-                    <td>フォロワー</td>
-                    <td><%=@musician.followers.count%></td>
+                    <td class="text-center">フォロワー</td>
+                    <td class="text-center"><%=@musician.followers.count%></td>
                 </tr>
             </tbody>
         </table>
       </div>
-        
+      
   <div class="card-deck justify-content-center">
     <% @musician_events.each do |event|%>
-      <div class="card bg-light  col-3 m-3" style="width:50%" "height:50%">
-        <%= link_to public_event_path(event.id) do %>
-            <h4 class="card-header"><%=event.name%></h4>
-            
-            <div class="card-body">
-              <div class="text-center">
-                <% if event.event_image.attached?%>
-                  <%=image_tag event.event_image,width:'100%',height:'100%'%>
-                <%else%>
-                  <%=image_tag 'no_image',width:'100%',height:'100%'%>
-                <%end%>
-                
-                <p><%=event.musician.name%></p>
-                <p><%=event.datetime%></p>
-                
-                <p>
-                   <% event.genre_items.first(3).each do |genre_item|%>
-                     <div class="m-1 p-1 border">
-                       <%=genre_item.name%>
-                     </div>
-                   <%end%>  
-                </p>
-              </div>
-            </div>
-        <%end%>
-        <div class="card-footer">
-          <%=event.created_at.strftime('%Y年%m月%d日%H時%M分')%>
-        </div>
-      </div>
-    <%end%>
-    </div>
     
+      <div class="card bg-light col-xl-4 col-lg-4 col-sm-12 col-md-12 m-3">
+        <%= link_to public_event_path(event.id) do %>
+          <h4 class="card-header"><%=event.name%></h4>
+          
+          <div class="card-body">
+            <div class="text-center">
+              <% if event.event_image.attached?%>
+                <%=image_tag event.event_image,width:'200px',height:'200px'%>
+              <%else%>
+                <%=image_tag 'no_image',width:'200px',height:'200px'%>
+              <%end%>
+              
+              <p><%=event.musician.name%></p>
+              <p><%=event.datetime%></p>
+              
+              <p>
+                 <% event.genre_items.first(3).each do |genre_item|%>
+                   <div class="m-1 p-1 border">
+                     <%=genre_item.name%>
+                   </div>
+                 <%end%>  
+              </p>
+            </div>
+          </div>
+          
+          <div class="card-footer">
+            <%=event.created_at.strftime('%Y年%m月%d日%H時%M分')%>
+          </div>
+        <%end%>
+      </div>
+      
+    <%end%>
+  </div>
+        
+  
     <div class="text-center">
       <%= paginate @musician_events%>
     </div>
