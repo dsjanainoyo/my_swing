@@ -23,15 +23,17 @@
             </thead>
             <tbody>
                 <% @musicians.each do |musician|%>
-                  <tr>
-                      <td class="text-center"><%=link_to musician.name, public_musician_path(musician.id)%></td>
-                      <td class="text-center"><%=musician.events.count%></td>
-                      <td class="text-center">
-                          <%musician.genre_items.each do |genre_item|%>
-                            <span class="text-center" style="display: block;"><%=genre_item.name%></span>
-                          <%end%>
-                      </td>
-                  </tr>
+                  <%if musician.is_deleted == 'validity'%>
+                    <tr>
+                        <td class="text-center"><%=link_to musician.name, public_musician_path(musician.id)%></td>
+                        <td class="text-center"><%=musician.events.count%></td>
+                        <td class="text-center">
+                            <%musician.genre_items.each do |genre_item|%>
+                              <span class="text-center" style="display: block;"><%=genre_item.name%></span>
+                            <%end%>
+                        </td>
+                    </tr>
+                  <%end%>
                 <%end%> 
             </tbody>
         </table>
