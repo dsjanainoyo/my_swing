@@ -35,6 +35,12 @@ class Musician::EventsController < ApplicationController
     end
   end
   
+  def destroy
+    event=Event.find(params[:id])
+    event.destroy
+    redirect_to musician_events_path
+  end
+  
   private
   def event_params
     params.require(:event).permit(:name,:musician_id,:introduction,:start_month,:start_day,:start_hour,:start_minutes,:place,:price,:capacity,:seating_status,:event_image,genre_item_ids: [])

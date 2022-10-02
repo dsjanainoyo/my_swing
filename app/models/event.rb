@@ -2,7 +2,7 @@ class Event < ApplicationRecord
     has_one_attached :event_image
     
     has_many :reservations
-    belongs_to :musician
+    belongs_to :musician, dependent: :destroy
     has_many :favorites, dependent: :destroy
     has_many :comments, dependent: :destroy
     has_many :event_genres
