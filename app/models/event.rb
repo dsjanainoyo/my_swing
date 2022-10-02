@@ -2,11 +2,13 @@ class Event < ApplicationRecord
     has_one_attached :event_image
     
     has_many :reservations
-    belongs_to :musician, dependent: :destroy
+    belongs_to :musician
     has_many :favorites, dependent: :destroy
     has_many :comments, dependent: :destroy
     has_many :event_genres
     has_many :genre_items, through: :event_genres, dependent: :destroy
+    
+    scope :active_musicians, -> { joins(:musician).where(musician: { is_deleted: false }) }
     
     validates :name, presence: true
     validates :introduction, presence: true

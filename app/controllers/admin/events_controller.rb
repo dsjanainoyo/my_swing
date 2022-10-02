@@ -1,6 +1,6 @@
 class Admin::EventsController < ApplicationController
   def index
-    @events=Event.all.page(params[:page]).per(8)
+    @events=Event.active_musicians.page(params[:page]).per(8)
     
     
   end

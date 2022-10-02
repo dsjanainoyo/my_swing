@@ -20,7 +20,7 @@
             <% if @musician.musician_image.attached?%>
               <%=image_tag @musician.musician_image,size: '200x200'%>
             <%else%>
-              <%=image_tag 'no_image',size: '200x200'%>
+              <%=image_tag 'no_image.jpg',size: '200x200'%>
             <%end%>
         </div> 
 
@@ -67,7 +67,7 @@
               <% if event.event_image.attached?%>
                 <%=image_tag event.event_image,width:'200px',height:'200px'%>
               <%else%>
-                <%=image_tag 'no_image',width:'200px',height:'200px'%>
+                <%=image_tag 'no_image.jpg',width:'200px',height:'200px'%>
               <%end%>
               
               <p><%=event.musician.name%></p>

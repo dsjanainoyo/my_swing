@@ -26,7 +26,7 @@
     <% if @event.event_image.attached?%>
       <%=image_tag @event.event_image, size: '250x250'%>
     <%else%>
-      <%=image_tag 'no_image.jpeg', size: '250x250'%>
+      <%=image_tag 'no_image.jpg', size: '250x250'%>
     <%end%>
   </div>
   
@@ -99,7 +99,7 @@
                   <% if comment.user.user_image.attached?%>
                     <%=image_tag comment.user.user_image,size: '100x100',class:"img-thumbnail"%>
                   <%else%>
-                    <%=image_tag 'no_image.jpeg',size: '100x100', class:"img-thumbnail"%>
+                    <%=image_tag 'no_image.jpg',size: '100x100', class:"img-thumbnail"%>
                   <%end%>
                 
            
@@ -116,7 +116,7 @@
                   <% if comment.musician.musician_image.attached?%>
                     <%=image_tag comment.musician.musician_image,size: '100x100', class:"img-thumbnail"%>
                   <%else%>
-                    <%=image_tag 'no_image.jpeg',size: '100x100', class:"img-thumbnail"%>
+                    <%=image_tag 'no_image.jpg',size: '100x100', class:"img-thumbnail"%>
                   <%end%>
                   
                   <div class="text-center">
