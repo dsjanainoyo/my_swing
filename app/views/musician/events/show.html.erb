@@ -47,6 +47,15 @@
                 <td>予約数</td>
                 <td><%=@event.capacity%></td>
             </tr>
+            
+            <tr>
+                <td class="text-center">ジャンル</td>
+                <td class="text-center">
+                    <% current_musician.genre_items.each do |genre_item|%>
+                      <span class="text-center p-1" style="display: block;"><%=genre_item.name%></span>
+                    <%end%>
+                </td>
+            </tr>
         </tbody>
     </table>  
   </div>
