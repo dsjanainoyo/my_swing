@@ -15,9 +15,9 @@ class Musician < ApplicationRecord
   
   has_many :musician_genres
   has_many :genre_items, through: :musician_genres, dependent: :destroy
-  
   has_many :users, through: :relationships, dependent: :destroy
   
+
   validates :name, presence: true
   
   enum is_deleted:{

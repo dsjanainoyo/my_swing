@@ -21,36 +21,37 @@
               
               <div class="col-xs-12 col-sm-6 col-lg-6">
                   <div class="mx-auto">
-                    <table class="table text-center p-5">
-                        <tbody>
-                            <tr>
-                                <td>イベント名</td>
-                                <td><%=@event.name%></td>
-                            </tr>
-                            
-                            <tr>
-                                <td>予約ステータス</td>
-                                <td><%=@event.seating_status_i18n%></td>
-                            </tr>
-                            
-                            <tr>
-                                <%= form_with model: @reservation, url: public_event_reservations_path(@event.id) do |f|%>
+                    <%= form_with model: @reservation, url: public_event_reservations_path(@event.id) do |f|%>
+                        <table class="table text-center p-5">
+                            <tbody>
+                                <tr>
+                                    <td>イベント名</td>
+                                    <td><%=@event.name%></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>予約ステータス</td>
+                                    <td><%=@event.seating_status_i18n%></td>
+                                </tr>
+                                
+                                <tr>
                                   <td><%=f.label :headcount, '人数'%></td>
                                   <td><%= f.select :headcount, *[1..10],{include_blank: '選択してください'}%></td>
-                            </tr>
-                            
-                            <tr class="text-center">
-                                <td>
+                                </tr>
+                                
+                                <tr>
                                     <%=f.hidden_field :event_id, :value => @event.id%>
-                                    <%=f.submit '予約する',class:"btn btn-success"%>
-                                <%end%>
-                                </td>
-                            </tr>
-                        </tbody>  
-                    </table>
+                                    <td><%=f.submit '予約する',class:"btn btn-success"%></td>
+                                    <td id="alert" class="text-danger"><%=alert%></td>
+                                </tr>
+                            </tbody>  
+                        </table>
+                    <%end%>
+                          
                   </div>
               </div>
           </div>
       </div>
   </main>
-      
+  
+                    

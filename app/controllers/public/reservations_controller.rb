@@ -5,10 +5,17 @@ class Public::ReservationsController < ApplicationController
   end
 
   def create
+    
     reservation=Reservation.new(reservation_params)
     reservation.user_id=current_user.id
-    reservation.save
-    redirect_to  public_reservations_index_path
+    
+    if reservation.headcount == 1..10
+      reservation.save
+      redirect_to  public_reservations_index_path
+    else
+      flash[:alert] = '人数を選択してください'
+      redirect_to new_public_event_reservation_path(reservation.event_id)
+    end
   end
   
   def destroy
