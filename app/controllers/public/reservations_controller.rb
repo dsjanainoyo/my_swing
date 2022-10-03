@@ -9,8 +9,7 @@ class Public::ReservationsController < ApplicationController
     reservation=Reservation.new(reservation_params)
     reservation.user_id=current_user.id
     
-    if reservation.headcount == 1..10
-      reservation.save
+    if reservation.save
       redirect_to  public_reservations_index_path
     else
       flash[:alert] = '人数を選択してください'
